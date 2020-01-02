@@ -1,0 +1,38 @@
+<?php
+
+	namespace dovechen\yii2\weWork\src\dataStructure;
+
+	use dovechen\yii2\weWork\components\Utils;
+
+	/**
+	 * Class ExternalProfile
+	 *
+	 * @property AttrItem $external_attr      属性列表，目前支持文本、网页、小程序三种类型
+	 * @property string   $external_corp_name 企业对外简称，需从已认证的企业简称中选填。可在“我的企业”页中查看企业简称认证状态。
+	 *
+	 * @package dovechen\yii2\weWork\src\dataStructure
+	 */
+	class ExternalProfile
+	{
+		/**
+		 * @param array $arr
+		 *
+		 * @return ExternalProfile
+		 */
+		public static function parseFromArray ($arr)
+		{
+			$externalProfile = new ExternalProfile();
+
+			$externalProfile->external_corp_name = Utils::arrayGet($arr, "external_corp_name");
+			$externalProfile->external_attr      = [];
+
+			$externalAttr = Utils::arrayGet($arr, "external_attr");
+			if (!is_null($externalAttr) && !empty($externalAttr)) {
+				foreach ($externalAttr as $attr) {
+					array_push($externalProfile->external_attr, AttrItem::parseFromArray($externalAttr));
+				}
+			}
+
+			return $externalProfile;
+		}
+	}
