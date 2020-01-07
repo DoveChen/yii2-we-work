@@ -2,7 +2,7 @@
 
 	namespace dovechen\yii2\weWork\src\dataStructure;
 
-	include_once "../../components/errorInc/error.inc.php";
+	include_once __DIR__ . "/../../components/errorInc/error.inc.php";
 
 	use dovechen\yii2\weWork\components\Utils;
 

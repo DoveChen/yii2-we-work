@@ -45,12 +45,12 @@
 		 * access_token是企业后台去企业微信的后台获取信息时的重要票据，由corpid和secret产生。所有接口在通信时都需要携带此信息用于验证接口的访问权限
 		 * @var string
 		 */
-		protected $access_token;
+		public $access_token;
 		/**
 		 * 凭证的有效时间（秒）
 		 * @var string
 		 */
-		protected $access_token_expire;
+		public $access_token_expire;
 		/**
 		 * 用于计算签名，由英文或数字组成且长度不超过32位的自定义字符串。
 		 * @var string

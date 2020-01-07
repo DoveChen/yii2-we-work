@@ -90,7 +90,7 @@
 			}
 
 			$time = time();
-			$this->_HttpCall(self::SERVICE_GET_CORP_TOKEN, 'GET', ['auth_corpid' => $this->auth_corpid, 'permanent_code' => $this->permanent_code]);
+			$this->_HttpCall(self::SERVICE_GET_CORP_TOKEN, 'POST', ['auth_corpid' => $this->auth_corpid, 'permanent_code' => $this->permanent_code]);
 
 			$this->repJson['expire'] = $time + $this->repJson["expires_in"];
 			$this->setCache('access_token', $this->repJson, $this->repJson['expires_in']);
