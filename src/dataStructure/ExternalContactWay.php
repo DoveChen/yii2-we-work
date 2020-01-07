@@ -44,7 +44,16 @@
 			$externalContactWay->remark      = Utils::arrayGet($arr, 'remark');
 			$externalContactWay->skip_verify = Utils::arrayGet($arr, 'skip_verify');
 			$externalContactWay->state       = Utils::arrayGet($arr, 'state');
-			$externalContactWay->qr_code     = Utils::arrayGet($arr, 'qr_code');
+
+			if (!empty(Utils::arrayGet($arr, 'user'))) {
+				$externalContactWay->user = Utils::arrayGet($arr, 'user');
+			}
+
+			if (!empty(Utils::arrayGet($arr, 'party'))) {
+				$externalContactWay->party = Utils::arrayGet($arr, 'party');
+			}
+
+			$externalContactWay->qr_code = Utils::arrayGet($arr, 'qr_code');
 
 			return $externalContactWay;
 		}

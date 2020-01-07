@@ -510,7 +510,7 @@
 
 		public function ECGetContactWay ($configId)
 		{
-			Utils::checkNotEmptyStr($configId);
+			Utils::checkNotEmptyStr($configId, 'config_id');
 			self::_HttpCall(self::EXTERNAL_CONTACT_GET_CONTACT_WAY, 'POST', ['config_id' => $configId]);
 
 			return ExternalContact::wayParseFromArray($this->repJson);
