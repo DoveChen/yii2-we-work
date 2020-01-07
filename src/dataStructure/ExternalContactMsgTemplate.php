@@ -83,7 +83,7 @@
 		 */
 		public static function checkMsgTemplateSendArgs ($msgTemplate)
 		{
-			Utils::checkNotEmptyStr($msgTemplate->welcome_code);
+			Utils::checkNotEmptyStr($msgTemplate->welcome_code, 'welcome code');
 
 			/*
 			 * text、image、link和miniprogram四者不能同时为空；
@@ -123,7 +123,7 @@
 		 */
 		public static function checkGroupWelcomeTemplateEditArgs ($msgTemplate)
 		{
-			Utils::checkNotEmptyStr($msgTemplate->template_id);
+			Utils::checkNotEmptyStr($msgTemplate->template_id, 'template id');
 
 			/*
 			 * text、image、link和miniprogram四者不能同时为空；

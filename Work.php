@@ -485,7 +485,7 @@
 
 		public function batchGetResult ($jobId)
 		{
-			Utils::checkNotEmptyStr($jobId);
+			Utils::checkNotEmptyStr($jobId, 'jobid');
 			self::_HttpCall(self::BATCH_GET_RESULT, 'GET', ['jobid' => $jobId]);
 
 			return Batch::parseFromArray($this->repJson);
@@ -527,7 +527,7 @@
 
 		public function ECDelContactWay ($configId)
 		{
-			Utils::checkNotEmptyStr($configId);
+			Utils::checkNotEmptyStr($configId, 'config_id');
 			self::_HttpCall(self::EXTERNAL_CONTACT_DEL_CONTACT_WAY, 'POST', ['config_id' => $configId]);
 
 			return $this->repJson;
@@ -536,7 +536,7 @@
 		/* 客户管理 */
 		public function ECList ($userId)
 		{
-			Utils::checkNotEmptyStr($userId);
+			Utils::checkNotEmptyStr($userId, 'userid');
 			self::_HttpCall(self::EXTERNAL_CONTACT_LIST, 'GET', ['userid' => $userId]);
 
 			return $this->repJson;
@@ -544,7 +544,7 @@
 
 		public function ECGet ($externalUserId)
 		{
-			Utils::checkNotEmptyStr($externalUserId);
+			Utils::checkNotEmptyStr($externalUserId, 'external userid');
 			self::_HttpCall(self::EXTERNAL_CONTACT_GET, 'GET', ['external_userid' => $externalUserId]);
 
 			return ExternalContact::parseFromArray(Utils::arrayGet($this->repJson, 'external_contact'));
@@ -562,7 +562,7 @@
 		/* 客户标签管理 */
 		public function ECGetCorpTagList ($tagIdList)
 		{
-			Utils::checkNotEmptyArray($tagIdList);
+			Utils::checkNotEmptyArray($tagIdList, 'tag id list');
 			self::_HttpCall(self::EXTERNAL_CONTACT_GET_CORP_TAG_LIST, 'POST', ['tag_id' => $tagIdList]);
 
 			return ExternalContactTagGroup::arrayToTagGroup($this->repJson);
