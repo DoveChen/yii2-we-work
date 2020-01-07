@@ -64,11 +64,19 @@
 			$user->enable            = Utils::arrayGet($arr, 'enable');
 			$user->hide_mobile       = Utils::arrayGet($arr, 'hide_mobile');
 			$user->english_name      = Utils::arrayGet($arr, 'english_name');
-			$user->extattr           = Attr::parseFromArray(Utils::arrayGet($arr, 'extattr'));
-			$user->to_invite         = Utils::arrayGet($arr, 'to_invite');
-			$user->status            = Utils::arrayGet($arr, 'status');
-			$user->qr_code           = Utils::arrayGet($arr, 'qr_code');
-			$user->external_profile  = ExternalProfile::parseFromArray(Utils::arrayGet($arr, 'external_profile'));
+
+			if (!is_null(Utils::arrayGet($arr, 'extattr'))) {
+				$user->extattr = Attr::parseFromArray(Utils::arrayGet($arr, 'extattr'));
+			}
+
+			$user->to_invite = Utils::arrayGet($arr, 'to_invite');
+			$user->status    = Utils::arrayGet($arr, 'status');
+			$user->qr_code   = Utils::arrayGet($arr, 'qr_code');
+
+			if (!is_null(Utils::arrayGet($arr, 'external_profile'))) {
+				$user->external_profile = ExternalProfile::parseFromArray(Utils::arrayGet($arr, 'external_profile'));
+			}
+
 			$user->external_position = Utils::arrayGet($arr, 'external_position');
 			$user->address           = Utils::arrayGet($arr, 'address');
 
