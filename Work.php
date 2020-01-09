@@ -790,9 +790,9 @@
 				$args = ['media' => '@' . realpath($filePath)];
 			}
 
-			self::_HttpCall(self::MEDIA_UPLOAD, 'POST', $args, true, true);
+			self::_HttpCall(self::MEDIA_UPLOAD. '&type=' . $type, 'POST', $args, true, true);
 
-			return $this->rspJson["media_id"];
+			return $this->repJson["media_id"];
 		}
 
 		public function MediaUploadByBuffer ($buffer, $type)
@@ -815,7 +815,7 @@
 			Utils::checkNotEmptyStr($media_id, "media_id");
 			self::_HttpCall(self::MEDIA_GET, 'GET', ['media_id' => $media_id]);
 
-			return $this->rspRawStr;
+			return $this->repRawStr;
 		}
 
 		public function UploadImage ($filePath, $md5 = NULL)
@@ -835,6 +835,6 @@
 
 			self::_HttpCall(self::MEDIA_UPLOAD_IMG, 'POST', $args, true, true);
 
-			return $this->rspJson["url"];
+			return $this->repJson["url"];
 		}
 	}
