@@ -375,7 +375,7 @@
 		/* 标签管理 */
 		public function tagCreate (Tag $tag, &$tagId)
 		{
-			Tag::CheckTagCreateArgs();
+			Tag::CheckTagCreateArgs($tag);
 			$args = Tag::Tag2Array($tag);
 			self::_HttpCall(self::TAG_CREATE, 'POST', $args);
 
@@ -547,7 +547,10 @@
 			Utils::checkNotEmptyStr($externalUserId, 'external userid');
 			self::_HttpCall(self::EXTERNAL_CONTACT_GET, 'GET', ['external_userid' => $externalUserId]);
 
-			return ExternalContact::parseFromArray(Utils::arrayGet($this->repJson, 'external_contact'));
+			$externalContact                = Utils::arrayGet($this->repJson, 'external_contact');
+			$externalContact['follow_user'] = Utils::arrayGet($this->repJson, 'follow_user');
+
+			return ExternalContact::parseFromArray($externalContact);
 		}
 
 		public function ECRemark (ExternalContactRemark $externalContactRemark)
@@ -768,5 +771,70 @@
 			self::_HttpCall(self::USR_GET_USER_INFO, 'GET', ['code' => $code]);
 
 			return UserInfoByCode::parseFromArray($this->repJson);
+		}
+
+		/* 素材管理 */
+		public function MediaUpload ($filePath, $type)
+		{
+			Utils::checkNotEmptyStr($filePath, "filePath");
+			Utils::checkNotEmptyStr($type, "type");
+			if (!file_exists($filePath)) {
+				throw new QyApiError("file not exists");
+			}
+
+			// 兼容php5.3-5.6 curl模块的上传操作
+			$args = [];
+			if (class_exists('\CURLFile')) {
+				$args = ['media' => new \CURLFile(realpath($filePath), 'application/octet-stream', basename($filePath))];
+			} else {
+				$args = ['media' => '@' . realpath($filePath)];
+			}
+
+			self::_HttpCall(self::MEDIA_UPLOAD, 'POST', $args, true, true);
+
+			return $this->rspJson["media_id"];
+		}
+
+		public function MediaUploadByBuffer ($buffer, $type)
+		{
+			$tmpPath = self::WriteTmpFile($buffer);
+
+			try {
+				$ret = $this->mediaUpload($tmpPath, $type);
+				unlink($tmpPath);
+
+				return $ret;
+			} catch (Exception $ex) {
+				unlink($tmpPath);
+				throw $ex;
+			}
+		}
+
+		public function MediaGet ($media_id)
+		{
+			Utils::checkNotEmptyStr($media_id, "media_id");
+			self::_HttpCall(self::MEDIA_GET, 'GET', ['media_id' => $media_id]);
+
+			return $this->rspRawStr;
+		}
+
+		public function UploadImage ($filePath, $md5 = NULL)
+		{
+			Utils::checkNotEmptyStr($filePath, "filePath");
+			if (!file_exists($filePath)) {
+				throw new QyApiError("file not exists");
+			}
+
+			// 兼容php5.3-5.6 curl模块的上传操作
+			$args = [];
+			if (class_exists('\CURLFile')) {
+				$args = ['media' => new \CURLFile(realpath($filePath), 'application/octet-stream', basename($filePath))];
+			} else {
+				$args = ['media' => '@' . $filePath];//realpath($filePath));
+			}
+
+			self::_HttpCall(self::MEDIA_UPLOAD_IMG, 'POST', $args, true, true);
+
+			return $this->rspJson["url"];
 		}
 	}

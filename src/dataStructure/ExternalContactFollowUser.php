@@ -11,6 +11,7 @@
 	 * @property string $remark             该成员对此外部联系人的备注
 	 * @property string $description        该成员对此外部联系人的描述
 	 * @property string $createtime         该成员添加此外部联系人的时间
+	 * @property string $state              该成员添加此客户的渠道，由用户通过创建「联系我」方式指定
 	 * @property array  $tags               标签信息
 	 * @property string $remark_corp_name   该成员对此客户备注的企业名称
 	 * @property array  $remark_mobiles     该成员对此客户备注的手机号码，第三方不可获取
@@ -32,11 +33,11 @@
 			$externalContactFollowUser->remark      = Utils::arrayGet($arr, 'remark');
 			$externalContactFollowUser->description = Utils::arrayGet($arr, 'description');
 			$externalContactFollowUser->createtime  = Utils::arrayGet($arr, 'createtime');
+			$externalContactFollowUser->state       = Utils::arrayGet($arr, 'state');
 
-			$userTags = Utils::arrayGet($arr, 'tags');
+			$userTags                        = Utils::arrayGet($arr, 'tags');
+			$externalContactFollowUser->tags = [];
 			if (Utils::notEmptyArray($userTags)) {
-				$externalContactFollowUser->tags = [];
-
 				foreach ($userTags as $item) {
 					array_push($externalContactFollowUser->tags, ExternalContactFollowUserTag::parseFromArray($item));
 				}

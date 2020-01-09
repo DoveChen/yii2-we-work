@@ -354,26 +354,21 @@
 		}
 
 		/**
-		 * @param $url
-		 * @param $method
-		 * @param $args
-		 *
-		 * @throws \QyApiError
-		 */
-		/**
-		 * @param string $url
+		 * @param        $url
 		 * @param string $method
 		 * @param array  $args
+		 * @param bool   $refreshTokenWhenExpired
+		 * @param bool   $isPostFile
 		 *
 		 * @throws \HttpError
 		 * @throws \NetWorkError
 		 * @throws \QyApiError
 		 */
-		protected function _HttpCall ($url, $method = "GET", $args = [])
+		protected function _HttpCall ($url, $method = "GET", $args = [], $refreshTokenWhenExpired = true, $isPostFile = false)
 		{
 			if ('POST' == strtoupper($method)) {
 				$url = HttpUtils::MakeUrl($url);
-				$this->_HttpPostParseToJson($url, $args);
+				$this->_HttpPostParseToJson($url, $args, $refreshTokenWhenExpired, $isPostFile);
 				$this->_CheckErrCode();
 			} else if ('GET' == strtoupper($method)) {
 				if (count($args) > 0) {
