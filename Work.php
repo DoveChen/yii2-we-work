@@ -17,6 +17,8 @@
 	use dovechen\yii2\weWork\src\dataStructure\ExternalContactTagGroup;
 	use dovechen\yii2\weWork\src\dataStructure\ExternalContactUnAssignUser;
 	use dovechen\yii2\weWork\src\dataStructure\ExternalContactWay;
+	use dovechen\yii2\weWork\src\dataStructure\LinkedcorpMessage;
+	use dovechen\yii2\weWork\src\dataStructure\Message;
 	use dovechen\yii2\weWork\src\dataStructure\Tag;
 	use dovechen\yii2\weWork\src\dataStructure\User;
 	use dovechen\yii2\weWork\src\dataStructure\UserInfoByCode;
@@ -295,6 +297,24 @@
 			return $this->repJson;
 		}
 
+		private function getInvalidList (&$invalidUserIdList, &$invalidPartyIdList, &$invalidTagIdList)
+		{
+			$invalidUserIdList = Utils::arrayGet($this->repJson, "invaliduser");
+			if (strpos($invalidUserIdList, '|') !== false) {
+				$invalidUserIdList = explode('|', $invalidUserIdList);
+			}
+
+			$invalidPartyIdList = Utils::arrayGet($this->repJson, "invalidparty");
+			if (strpos($invalidPartyIdList, '|') !== false) {
+				$invalidPartyIdList = explode('|', $invalidPartyIdList);
+			}
+
+			$invalidTagIdList = Utils::arrayGet($this->repJson, "invalidtag");
+			if (strpos($invalidTagIdList, '|') !== false) {
+				$invalidTagIdList = explode('|', $invalidTagIdList);
+			}
+		}
+
 		public function batchInvite ($userIdList = NULL, $partyIdList = NULL, $tagIdList = NULL, &$invalidUserIdList, &$invalidPartyIdList, &$invalidTagIdList)
 		{
 			if (!Utils::notEmptyArray($userIdList) && !Utils::notEmptyArray($partyIdList) && !Utils::notEmptyArray($tagIdList)) {
@@ -317,9 +337,7 @@
 
 			self::_HttpCall(self::BATCH_INVITE, 'POST', $args);
 
-			$invalidUserIdList  = Utils::arrayGet($this->repJson, 'invaliduser');
-			$invalidPartyIdList = Utils::arrayGet($this->repJson, 'invalidparty');
-			$invalidTagIdList   = Utils::arrayGet($this->repJson, 'invalidtag');
+			$this->getInvalidList($invalidUserIdList, $invalidPartyIdList, $invalidTagIdList);
 		}
 
 		public function corpGetJoinQrcode (&$joinQrcode, $sizeType = NULL)
@@ -790,7 +808,7 @@
 				$args = ['media' => '@' . realpath($filePath)];
 			}
 
-			self::_HttpCall(self::MEDIA_UPLOAD. '&type=' . $type, 'POST', $args, true, true);
+			self::_HttpCall(self::MEDIA_UPLOAD . '&type=' . $type, 'POST', $args, true, true);
 
 			return $this->repJson["media_id"];
 		}
@@ -836,5 +854,27 @@
 			self::_HttpCall(self::MEDIA_UPLOAD_IMG, 'POST', $args, true, true);
 
 			return $this->repJson["url"];
+		}
+
+		/* 发送应用消息 */
+		public function MessageSend (Message $message, &$invalidUserIdList, &$invalidPartyIdList, &$invalidTagIdList)
+		{
+			Message::CheckMessageSendArgs($message);
+			$args = Message::Message2Array($message);
+
+			self::_HttpCall(self::MESSAGE_SEND, 'POST', $args);
+
+			$this->getInvalidList($invalidUserIdList, $invalidPartyIdList, $invalidTagIdList);
+		}
+
+		/* 互联企业消息推送 */
+		public function LinkedMessageSend (LinkedcorpMessage $message, &$invalidUserIdList, &$invalidPartyIdList, &$invalidTagIdList)
+		{
+			LinkedcorpMessage::CheckMessageSendArgs($message);
+			$args = LinkedcorpMessage::Message2Array($message);
+
+			self::_HttpCall(self::LINKED_CORP_MESSAGE_SEND, 'POST', $args);
+
+			$this->getInvalidList($invalidUserIdList, $invalidPartyIdList, $invalidTagIdList);
 		}
 	}
