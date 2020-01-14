@@ -34,6 +34,7 @@
 		{
 			$textcard = new TextcardMesssageContent();
 
+			$textcard->msgtype     = static::MSG_TYPE;
 			$textcard->title       = Utils::arrayGet($arr, 'title');
 			$textcard->description = Utils::arrayGet($arr, 'description');
 			$textcard->url         = Utils::arrayGet($arr, 'url');

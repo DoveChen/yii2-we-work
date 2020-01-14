@@ -31,6 +31,7 @@
 		{
 			$image = new VoiceMesssageContent();
 
+			$image->msgtype  = static::MSG_TYPE;
 			$image->media_id = Utils::arrayGet($arr, 'media_id');
 
 			return $image;

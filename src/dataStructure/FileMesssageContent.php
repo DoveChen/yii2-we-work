@@ -31,6 +31,7 @@
 		{
 			$file = new FileMesssageContent();
 
+			$file->msgtype  = static::MSG_TYPE;
 			$file->media_id = Utils::arrayGet($arr, 'media_id');
 
 			return $file;

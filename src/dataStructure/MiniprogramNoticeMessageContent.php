@@ -36,6 +36,7 @@
 		{
 			$content = new MiniprogramNoticeMessageContent();
 
+			$content->msgtype             = static::MSG_TYPE;
 			$content->appid               = Utils::arrayGet($arr, 'appid');
 			$content->page                = Utils::arrayGet($arr, 'page');
 			$content->title               = Utils::arrayGet($arr, 'title');

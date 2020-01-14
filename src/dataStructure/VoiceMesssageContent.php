@@ -31,6 +31,7 @@
 		{
 			$voice = new VoiceMesssageContent();
 
+			$voice->msgtype  = static::MSG_TYPE;
 			$voice->media_id = Utils::arrayGet($arr, 'media_id');
 
 			return $voice;

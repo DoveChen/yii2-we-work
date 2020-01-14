@@ -34,6 +34,7 @@
 		{
 			$taskcard = new TaskcardMesssageContent();
 
+			$taskcard->msgtype     = static::MSG_TYPE;
 			$taskcard->title       = Utils::arrayGet($arr, 'title');
 			$taskcard->description = Utils::arrayGet($arr, 'description');
 			$taskcard->url         = Utils::arrayGet($arr, 'url');

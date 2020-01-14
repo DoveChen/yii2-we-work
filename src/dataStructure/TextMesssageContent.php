@@ -31,6 +31,7 @@
 		{
 			$text = new TextMesssageContent();
 
+			$text->msgtype = Utils::arrayGet($arr, 'msgtype');
 			$text->content = Utils::arrayGet($arr, 'content');
 
 			return $text;

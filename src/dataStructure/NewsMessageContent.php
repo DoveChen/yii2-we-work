@@ -29,11 +29,12 @@
 		 */
 		public static function parseFromArray ($arr)
 		{
-			$mpNewsMesssageContent = new NewsMessageContent();
+			$newsMesssageContent = new NewsMessageContent();
 
-			$mpNewsMesssageContent->articles = Utils::arrayGet($arr, 'articles');
+			$newsMesssageContent->msgtype  = static::MSG_TYPE;
+			$newsMesssageContent->articles = Utils::arrayGet($arr, 'articles');
 
-			return $mpNewsMesssageContent;
+			return $newsMesssageContent;
 		}
 
 		/**

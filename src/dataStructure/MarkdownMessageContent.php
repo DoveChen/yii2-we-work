@@ -31,6 +31,7 @@
 		{
 			$markdownMessageContent = new MarkdownMessageContent();
 
+			$markdownMessageContent->msgtype = static::MSG_TYPE;
 			$markdownMessageContent->content = Utils::arrayGet($arr, 'content');
 
 			return $markdownMessageContent;

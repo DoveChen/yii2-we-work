@@ -33,6 +33,7 @@
 		{
 			$video = new VideoMesssageContent();
 
+			$video->msgtype     = static::MSG_TYPE;
 			$video->media_id    = Utils::arrayGet($arr, 'media_id');
 			$video->title       = Utils::arrayGet($arr, 'title');
 			$video->description = Utils::arrayGet($arr, 'description');
