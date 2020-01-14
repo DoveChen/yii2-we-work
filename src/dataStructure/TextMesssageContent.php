@@ -31,7 +31,7 @@
 		{
 			$text = new TextMesssageContent();
 
-			$text->content = Utils::arrayGet($arr, 'media_id');
+			$text->content = Utils::arrayGet($arr, 'content');
 
 			return $text;
 		}
