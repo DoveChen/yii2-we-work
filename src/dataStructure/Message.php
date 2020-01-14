@@ -88,14 +88,20 @@
 			if (true == $message->sendToAll) {
 				Utils::setIfNotNull("@all", "touser", $args);
 			} else {
-				$touser_string = implode('|', $message->touser);
-				Utils::setIfNotNull($touser_string, "touser", $args);
+				if (Utils::notEmptyArray($message->touser)) {
+					$touser_string = implode('|', $message->touser);
+					Utils::setIfNotNull($touser_string, "touser", $args);
+				}
 
-				$toparty_string = implode('|', $message->toparty);
-				Utils::setIfNotNull($toparty_string, "toparty", $args);
+				if (Utils::notEmptyArray($message->toparty)) {
+					$toparty_string = implode('|', $message->toparty);
+					Utils::setIfNotNull($toparty_string, "toparty", $args);
+				}
 
-				$totag_string = implode('|', $message->totag);
-				Utils::setIfNotNull($totag_string, "totag", $args);
+				if (Utils::notEmptyArray($message->totag)) {
+					$totag_string = implode('|', $message->totag);
+					Utils::setIfNotNull($totag_string, "totag", $args);
+				}
 			}
 
 			Utils::setIfNotNull($message->agentid, "agentid", $args);
