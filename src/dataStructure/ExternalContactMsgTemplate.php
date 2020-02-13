@@ -49,6 +49,11 @@
 				$template->miniprogram = ExternalContactMsgTemplateMiniprogram::parseFromArray($templateMini);
 			}
 
+			$templateWelcomeCode = Utils::arrayGet($arr, 'welcome_code');
+			if (!is_null($templateMini)) {
+				$template->welcome_code = $templateWelcomeCode;
+			}
+
 			return $template;
 		}
 
