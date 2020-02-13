@@ -75,7 +75,7 @@
 			 * image、link和miniprogram只能有一个，如果三者同时填，则按image、link、miniprogram的优先顺序取参，也就是说，如果image与link同时传值，则只有image生效。
 			 * media_id可以通过素材管理接口获得。
 			 */
-			if (!Utils::notEmptyArray($msgTemplate->text) && !Utils::notEmptyArray($msgTemplate->image) && !Utils::notEmptyArray($msgTemplate->link) && !Utils::notEmptyArray($msgTemplate->miniprogram)) {
+			if (empty($msgTemplate->text) && empty($msgTemplate->image) && empty($msgTemplate->link) && empty($msgTemplate->miniprogram)) {
 				throw new \ParameterError('input error paramter.');
 			}
 		}
@@ -96,7 +96,7 @@
 			 * image、link和miniprogram只能有一个，如果三者同时填，则按image、link、miniprogram的优先顺序取参，也就是说，如果image与link同时传值，则只有image生效。
 			 * media_id可以通过素材管理接口获得。
 			 */
-			if (!Utils::notEmptyArray($msgTemplate->text) && !Utils::notEmptyArray($msgTemplate->image) && !Utils::notEmptyArray($msgTemplate->link) && !Utils::notEmptyArray($msgTemplate->miniprogram)) {
+			if (empty($msgTemplate->text) && empty($msgTemplate->image) && empty($msgTemplate->link) && empty($msgTemplate->miniprogram)) {
 				throw new \ParameterError('input error paramter.');
 			}
 		}
@@ -115,7 +115,7 @@
 			 * image、link和miniprogram只能有一个，如果三者同时填，则按image、link、miniprogram的优先顺序取参，也就是说，如果image与link同时传值，则只有image生效。
 			 * media_id可以通过素材管理接口获得。
 			 */
-			if (!Utils::notEmptyArray($msgTemplate->text) && !Utils::notEmptyArray($msgTemplate->image) && !Utils::notEmptyArray($msgTemplate->link) && !Utils::notEmptyArray($msgTemplate->miniprogram)) {
+			if (empty($msgTemplate->text) && empty($msgTemplate->image) && empty($msgTemplate->link) && empty($msgTemplate->miniprogram)) {
 				throw new \ParameterError('input error paramter.');
 			}
 		}
@@ -136,7 +136,7 @@
 			 * image、link和miniprogram只能有一个，如果三者同时填，则按image、link、miniprogram的优先顺序取参，也就是说，如果image与link同时传值，则只有image生效。
 			 * media_id可以通过素材管理接口获得。
 			 */
-			if (!Utils::notEmptyArray($msgTemplate->text) && !Utils::notEmptyArray($msgTemplate->image) && !Utils::notEmptyArray($msgTemplate->link) && !Utils::notEmptyArray($msgTemplate->miniprogram)) {
+			if (empty($msgTemplate->text) && empty($msgTemplate->image) && empty($msgTemplate->link) && empty($msgTemplate->miniprogram)) {
 				throw new \ParameterError('input error paramter.');
 			}
 		}
