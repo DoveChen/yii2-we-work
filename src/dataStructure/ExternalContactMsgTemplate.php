@@ -50,7 +50,7 @@
 			}
 
 			$templateWelcomeCode = Utils::arrayGet($arr, 'welcome_code');
-			if (!is_null($templateMini)) {
+			if (!is_null($templateWelcomeCode)) {
 				$template->welcome_code = $templateWelcomeCode;
 			}
 
