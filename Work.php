@@ -797,7 +797,7 @@
 			Utils::checkNotEmptyStr($filePath, "filePath");
 			Utils::checkNotEmptyStr($type, "type");
 			if (!file_exists($filePath)) {
-				throw new QyApiError("file not exists");
+				throw new \QyApiError("file not exists");
 			}
 
 			// 兼容php5.3-5.6 curl模块的上传操作
@@ -840,7 +840,7 @@
 		{
 			Utils::checkNotEmptyStr($filePath, "filePath");
 			if (!file_exists($filePath)) {
-				throw new QyApiError("file not exists");
+				throw new \QyApiError("file not exists");
 			}
 
 			// 兼容php5.3-5.6 curl模块的上传操作

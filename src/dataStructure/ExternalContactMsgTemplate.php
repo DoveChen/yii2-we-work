@@ -29,6 +29,11 @@
 		{
 			$template = new ExternalContactMsgTemplate();
 
+			$templateWelcomeCode = Utils::arrayGet($arr, 'welcome_code');
+			if (!is_null($templateWelcomeCode)) {
+				$template->welcome_code = $templateWelcomeCode;
+			}
+
 			$templateText = Utils::arrayGet($arr, 'text');
 			if (!is_null($templateText)) {
 				$template->text = ExternalContactMsgTemplateText::parseFromArray($templateText);
@@ -47,11 +52,6 @@
 			$templateMini = Utils::arrayGet($arr, 'miniprogram');
 			if (!is_null($templateMini)) {
 				$template->miniprogram = ExternalContactMsgTemplateMiniprogram::parseFromArray($templateMini);
-			}
-
-			$templateWelcomeCode = Utils::arrayGet($arr, 'welcome_code');
-			if (!is_null($templateWelcomeCode)) {
-				$template->welcome_code = $templateWelcomeCode;
 			}
 
 			return $template;

@@ -7,7 +7,7 @@
 	/**
 	 * Class ExternalContactMsgTemplateText
 	 *
-	 * @property string $contect 消息文本内容，最多4000个字节
+	 * @property string $content 消息文本内容，最多4000个字节
 	 *
 	 * @package dovechen\yii2\weWork\src\dataStructure
 	 */
@@ -22,7 +22,7 @@
 		{
 			$textTemplate = new ExternalContactMsgTemplateText();
 
-			$textTemplate->contect = Utils::arrayGet($arr, 'content');
+			$textTemplate->content = Utils::arrayGet($arr, 'content');
 
 			return $textTemplate;
 		}
