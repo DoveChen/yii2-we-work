@@ -32,7 +32,12 @@
 			$mpNewsMesssageContent = new MpNewsMessageContent();
 
 			$mpNewsMesssageContent->msgtype  = static::MSG_TYPE;
-			$mpNewsMesssageContent->articles = Utils::arrayGet($arr, 'articles');
+			$mpNewsMesssageContent->articles = [];
+
+			$articles = Utils::arrayGet($arr, 'articles');
+			foreach ($articles as $article) {
+				array_push($mpNewsMesssageContent->articles, MpNewsArticle::parseFromArray($article));
+			}
 
 			return $mpNewsMesssageContent;
 		}

@@ -32,7 +32,12 @@
 			$newsMesssageContent = new NewsMessageContent();
 
 			$newsMesssageContent->msgtype  = static::MSG_TYPE;
-			$newsMesssageContent->articles = Utils::arrayGet($arr, 'articles');
+			$newsMesssageContent->articles = [];
+
+			$articles = Utils::arrayGet($arr, 'articles');
+			foreach ($articles as $article) {
+				array_push($newsMesssageContent->articles, NewsArticle::parseFromArray($article));
+			}
 
 			return $newsMesssageContent;
 		}
@@ -57,7 +62,7 @@
 			}
 
 			foreach ($newsMesssageContent->articles as $item) {
-				MpNewsArticle::CheckMessageSendArgs($item);
+				NewsArticle::CheckMessageSendArgs($item);
 			}
 		}
 
@@ -71,7 +76,7 @@
 
 			$articleList = [];
 			foreach ($newsMesssageContent->articles as $item) {
-				$articleList[] = MpNewsArticle::Article2Array($item);
+				$articleList[] = NewsArticle::Article2Array($item);
 			}
 
 			$arr[$newsMesssageContent->msgtype]["articles"] = $articleList;
