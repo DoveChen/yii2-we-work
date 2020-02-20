@@ -29,7 +29,7 @@
 		 */
 		public static function parseFromArray ($arr)
 		{
-			$image = new VoiceMesssageContent();
+			$image = new ImageMesssageContent();
 
 			$image->msgtype  = static::MSG_TYPE;
 			$image->media_id = Utils::arrayGet($arr, 'media_id');

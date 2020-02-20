@@ -43,7 +43,7 @@
 
 		/* 标签管理 */
 		const TAG_CREATE = '/cgi-bin/tag/create?access_token=ACCESS_TOKEN'; // 创建标签 POST
-		const TAG_UPDATE = '/tag/update?access_token=ACCESS_TOKEN'; // 更新标签名字 POST
+		const TAG_UPDATE = '/cgi-bin/tag/update?access_token=ACCESS_TOKEN'; // 更新标签名字 POST
 		const TAG_DELETE = '/cgi-bin/tag/delete?access_token=ACCESS_TOKEN'; // 删除标签 GET
 		const TAG_GET = '/cgi-bin/tag/get?access_token=ACCESS_TOKEN';   // 获取标签成员 GET
 		const TAG_ADD_TAG_USERS = '/cgi-bin/tag/addtagusers?access_token=ACCESS_TOKEN'; // 增加标签成员 POST
@@ -283,6 +283,10 @@
 		const SERVICE_RESET_SECRET_NO = '/cgi-bin/service/reset_secret_no?provider_access_token=PROVIDER_ACCESS_TOKEN';   // 重置设备SecretNo POST
 		const SERVICE_LIST_DEVICE = '/cgi-bin/service/list_device?provider_access_token=PROVIDER_ACCESS_TOKEN';   // 获取设备列表 POST
 		const SERVICE_FETCH_DEVICE_LOG = '/cgi-bin/service/fetch_device_log?provider_access_token=PROVIDER_ACCESS_TOKEN';   // 上传设备日志 POST
+
+		// js-sdk
+		const GET_JSAPI_TICKET = '/cgi-bin/get_jsapi_ticket?access_token=ACCESS_TOKEN';   // 获取企业的jsapi_ticket
+		const TICKET_GET = '/cgi-bin/ticket/get?access_token=ACCESS_TOKEN';   // 获取应用的jsapi_ticket
 
 		protected function GetAccessToken ($force = false)
 		{

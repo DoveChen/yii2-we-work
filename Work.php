@@ -877,4 +877,25 @@
 
 			$this->getInvalidList($invalidUserIdList, $invalidPartyIdList, $invalidTagIdList);
 		}
+
+		public function GetJsapiTicket ()
+		{
+			self::_HttpCall(self::GET_JSAPI_TICKET);
+
+			return $this->repJson;
+		}
+
+		public function TicketGet ()
+		{
+			self::_HttpCall(self::TICKET_GET, 'GET', ['type' => 'agent_config']);
+
+			return $this->repJson;
+		}
+
+		public function JsApiSignatureGet ($jsapiTicket, $nonceStr, $timestamp, $url)
+		{
+			$string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
+
+			return sha1($string);
+		}
 	}

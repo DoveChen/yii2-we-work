@@ -33,6 +33,11 @@
 			if (!is_null($templateWelcomeCode)) {
 				$template->welcome_code = $templateWelcomeCode;
 			}
+			
+			$templateExternalUserid = Utils::arrayGet($arr, 'external_userid');
+			if (!is_null($templateExternalUserid)) {
+				$template->external_userid = $templateExternalUserid;
+			}
 
 			$templateText = Utils::arrayGet($arr, 'text');
 			if (!is_null($templateText)) {
