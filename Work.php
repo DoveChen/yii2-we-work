@@ -583,7 +583,6 @@
 		/* 客户标签管理 */
 		public function ECGetCorpTagList ($tagIdList)
 		{
-			Utils::checkNotEmptyArray($tagIdList, 'tag id list');
 			self::_HttpCall(self::EXTERNAL_CONTACT_GET_CORP_TAG_LIST, 'POST', ['tag_id' => $tagIdList]);
 
 			return ExternalContactTagGroup::arrayToTagGroup($this->repJson);
@@ -865,6 +864,8 @@
 			self::_HttpCall(self::MESSAGE_SEND, 'POST', $args);
 
 			$this->getInvalidList($invalidUserIdList, $invalidPartyIdList, $invalidTagIdList);
+
+			return $this->repJson;
 		}
 
 		/* 互联企业消息推送 */

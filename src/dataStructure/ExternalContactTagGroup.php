@@ -74,7 +74,7 @@
 				throw new \ParameterError('group_id and group_name must be has one.');
 			};
 
-			Utils::checkNotEmptyArray($tagGroup->tag);
+			Utils::checkNotEmptyArray($tagGroup->tag, 'tag');
 
 			foreach ($tagGroup->tag as $tag) {
 				ExternalContactTag::checkExternalContactTagAddArgs($tag);
