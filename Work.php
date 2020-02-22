@@ -581,9 +581,15 @@
 		}
 
 		/* 客户标签管理 */
-		public function ECGetCorpTagList ($tagIdList)
+		public function ECGetCorpTagList ($tagIdList = NULL)
 		{
-			self::_HttpCall(self::EXTERNAL_CONTACT_GET_CORP_TAG_LIST, 'POST', ['tag_id' => $tagIdList]);
+			$args = [];
+			if (!is_null($tagIdList)) {
+				Utils::checkNotEmptyArray($tagIdList, 'tag id list');
+				$args['tag_id'] = $tagIdList;
+			}
+
+			self::_HttpCall(self::EXTERNAL_CONTACT_GET_CORP_TAG_LIST, 'POST', $args);
 
 			return ExternalContactTagGroup::arrayToTagGroup($this->repJson);
 		}
@@ -591,7 +597,8 @@
 		public function ECAddCorpTag (ExternalContactTagGroup $tagGroup)
 		{
 			ExternalContactTagGroup::checkExternalContactTagGroupAddArgs($tagGroup);
-			self::_HttpCall(self::EXTERNAL_CONTACT_ADD_CORP_TAG, 'POST', $tagGroup);
+			$args = Utils::Object2Array($tagGroup);
+			self::_HttpCall(self::EXTERNAL_CONTACT_ADD_CORP_TAG, 'POST', $args);
 
 			return ExternalContactTagGroup::parseFromArray(Utils::arrayGet($this->repJson, 'tag_group'));
 		}
@@ -599,7 +606,8 @@
 		public function ECEditCorpTag (ExternalContactTag $tag)
 		{
 			ExternalContactTag::checkExternalContactTagEditArgs($tag);
-			self::_HttpCall(self::EXTERNAL_CONTACT_EDIT_CORP_TAG, 'POST', $tag);
+			$args = Utils::Object2Array($tag);
+			self::_HttpCall(self::EXTERNAL_CONTACT_EDIT_CORP_TAG, 'POST', $args);
 
 			return $this->repJson;
 		}
@@ -898,5 +906,19 @@
 			$string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
 
 			return sha1($string);
+		}
+
+		public function AgentGet ($agentId)
+		{
+			self::_HttpCall(self::AGENT_GET, 'GET', ['agentid' => $agentId]);
+
+			return $this->repJson;
+		}
+
+		public function AgentList ()
+		{
+			self::_HttpCall(self::AGENT_LIST);
+
+			return $this->repJson;
 		}
 	}
