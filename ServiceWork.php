@@ -152,12 +152,12 @@
 			}
 		}
 
-		public function getAuthUrl ($redirectUri, $state, $authType = 0)
+		public function getAuthUrl ($redirectUri, $state, $authType = 0, $force = false)
 		{
 			$time = time();
 
-			if (!Utils::notEmptyStr($this->pre_auth_code) || $this->pre_auth_code_expires < $time) {
-				$result = !Utils::notEmptyStr($this->pre_auth_code) ? $this->getCache("pre_auth_code", false) : false;
+			if (!Utils::notEmptyStr($this->pre_auth_code) || $this->pre_auth_code_expires < $time || $force) {
+				$result = !Utils::notEmptyStr($this->pre_auth_code) && !$force ? $this->getCache("pre_auth_code", false) : false;
 				if ($result === false) {
 					$result = $this->getPreAuthCode();
 				} else {

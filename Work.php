@@ -5,6 +5,7 @@
 	require_once "components/errorInc/error.inc.php";
 
 	use dovechen\yii2\weWork\components\BaseWork;
+	use dovechen\yii2\weWork\src\dataStructure\Agent;
 	use dovechen\yii2\weWork\src\dataStructure\Batch;
 	use dovechen\yii2\weWork\src\dataStructure\BatchJobArgs;
 	use dovechen\yii2\weWork\src\dataStructure\Department;
@@ -799,18 +800,18 @@
 		}
 
 		/* 素材管理 */
-		public function MediaUpload ($filePath, $type)
+		public function MediaUpload ($filePath, $type, $plus = [])
 		{
 			Utils::checkNotEmptyStr($filePath, "filePath");
 			Utils::checkNotEmptyStr($type, "type");
 			if (!file_exists($filePath)) {
 				throw new \QyApiError("file not exists");
 			}
-
+			$fileName = !empty($plus['file_name']) ? $plus['file_name'] : basename($filePath);
 			// 兼容php5.3-5.6 curl模块的上传操作
 			$args = [];
 			if (class_exists('\CURLFile')) {
-				$args = ['media' => new \CURLFile(realpath($filePath), 'application/octet-stream', basename($filePath))];
+				$args = ['media' => new \CURLFile(realpath($filePath), 'application/octet-stream', $fileName)];
 			} else {
 				$args = ['media' => '@' . realpath($filePath)];
 			}
@@ -911,6 +912,15 @@
 		public function AgentGet ($agentId)
 		{
 			self::_HttpCall(self::AGENT_GET, 'GET', ['agentid' => $agentId]);
+
+			return $this->repJson;
+		}
+
+		public function AgentSet (Agent $agent)
+		{
+			Agent::CheckAgentSetArgs($agent);
+			$args = Agent::AgentSetArgs($agent);
+			self::_HttpCall(self::AGENT_SET, 'POST', $args);
 
 			return $this->repJson;
 		}
