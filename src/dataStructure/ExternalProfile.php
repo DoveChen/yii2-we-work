@@ -29,7 +29,7 @@
 			$externalAttr = Utils::arrayGet($arr, "external_attr");
 			if (!is_null($externalAttr) && !empty($externalAttr)) {
 				foreach ($externalAttr as $attr) {
-					array_push($externalProfile->external_attr, AttrItem::parseFromArray($externalAttr));
+					array_push($externalProfile->external_attr, AttrItem::parseFromArray($attr));
 				}
 			}
 

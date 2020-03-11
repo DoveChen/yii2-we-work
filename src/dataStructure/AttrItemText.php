@@ -22,7 +22,7 @@
 		{
 			$attrItemText = new AttrItemText();
 
-			$attrItemText->value = Utils::arrayGet($arr, "text");
+			$attrItemText->value = Utils::arrayGet($arr, "value");
 
 			return $attrItemText;
 		}
