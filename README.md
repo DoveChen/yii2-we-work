@@ -28,4 +28,34 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \dovechen\yii2\weWork\AutoloadExample::widget(); ?>```
+/** @var Work $workApi */
+$workApi = \Yii::createObject([
+    'class'  => Work::className(),
+    'corpid' => $corpid,
+    'secret' => $secret,
+]);
+
+/** @var Work $agentApi */
+$agentApi = \Yii::createObject([
+    'class'  => Work::className(),
+    'corpid' => $corpid,
+    'secret' => $agentSecret,
+]);
+
+/** @var ServiceWork $serviceWork */
+$serviceWork = \Yii::createObject([
+    'class'          => ServiceWork::className(),
+    'suite_id'       => $suiteId,
+    'suite_secret'   => $suiteSecret,
+    'suite_ticket'   => $suiteTicket,
+    'auth_corpid'    => $authCorpid,
+    'permanent_code' => $permanentCode,
+]);
+
+/** @var ServiceProvider $serviceProvider */
+$serviceProvider = \Yii::createObject([
+    'class'           => ServiceProvider::className(),
+    'provider_corpid' => $providerCorpid,
+    'provider_secret' => $providerSecret,
+]);
+```

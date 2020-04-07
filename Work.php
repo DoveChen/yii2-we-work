@@ -290,6 +290,14 @@
 			$userId = Utils::arrayGet($this->repJson, 'userid');
 		}
 
+		public function externalConvertToOpenid ($externalUserid, &$openid)
+		{
+			Utils::checkNotEmptyStr($externalUserid, 'external_userid');
+			self::_HttpCall(self::EXTERNAL_CONTACT_CONVER_TO_OPENID, 'POST', ['external_userid' => $externalUserid]);
+
+			$openid = Utils::arrayGet($this->repJson, 'openid');
+		}
+
 		public function userAuthSuccess ($userId)
 		{
 			Utils::checkNotEmptyStr($userId, 'userid');

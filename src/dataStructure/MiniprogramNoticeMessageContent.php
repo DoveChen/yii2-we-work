@@ -97,7 +97,7 @@
 			Utils::setIfNotNull($content->msgtype, "msgtype", $arr);
 
 			$args = [];
-			Utils::setIfNotNull($content->appid, "key", $args);
+			Utils::setIfNotNull($content->appid, "appid", $args);
 			Utils::setIfNotNull($content->page, "page", $args);
 			Utils::setIfNotNull($content->title, "title", $args);
 			Utils::setIfNotNull($content->description, "description", $args);

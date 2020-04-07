@@ -2,7 +2,7 @@
 
 	namespace dovechen\yii2\weWork;
 
-	require_once "./components/errorInc/error.inc.php";
+	require_once "components/errorInc/error.inc.php";
 
 	use dovechen\yii2\weWork\components\BaseWork;
 	use dovechen\yii2\weWork\components\Utils;
@@ -96,7 +96,7 @@
 			}
 
 			$time = time();
-			$this->_HttpCall(self::SERVICE_GET_PROVIDER_TOKEN, 'GET', ['corpid' => $this->provider_corpid, 'provider_secret' => $this->provider_secret]);
+			$this->_HttpCall(self::SERVICE_GET_PROVIDER_TOKEN, 'POST', ['corpid' => $this->provider_corpid, 'provider_secret' => $this->provider_secret]);
 
 			$this->repJson['expire'] = $time + $this->repJson["expires_in"];
 			$this->setCache('provider_access_token', $this->repJson, $this->repJson['expires_in']);
