@@ -440,11 +440,14 @@
 					if ($errCode == 40014 || $errCode == 42001 || $errCode == 42007 || $errCode == 42009) { // token expired
 						if ("NO_TOKEN" != $tokenType && true == $refreshTokenWhenExpired) {
 							if ("ACCESS_TOKEN" == $tokenType) {
-								$this->RefreshAccessToken();
+								$result = $this->RefreshAccessToken();
+								$this->SetAccessToken($result);
 							} else if ("SUITE_ACCESS_TOKEN" == $tokenType) {
-								$this->RefreshSuiteAccessToken();
+								$result = $this->RefreshSuiteAccessToken();
+								$this->SetSuiteAccessToken($result);
 							} else if ("PROVIDER_ACCESS_TOKEN" == $tokenType) {
-								$this->RefreshProviderAccessToken();
+								$result = $this->RefreshProviderAccessToken();
+								$this->SetProviderAccessToken($result);
 							}
 							$retryCnt += 1;
 							continue;
@@ -511,11 +514,14 @@
 				if ($errCode == 40014 || $errCode == 42001 || $errCode == 42007 || $errCode == 42009) { // token expired
 					if ("NO_TOKEN" != $tokenType && true == $refreshTokenWhenExpired) {
 						if ("ACCESS_TOKEN" == $tokenType) {
-							$this->RefreshAccessToken();
+							$result = $this->RefreshAccessToken();
+							$this->SetAccessToken($result);
 						} else if ("SUITE_ACCESS_TOKEN" == $tokenType) {
-							$this->RefreshSuiteAccessToken();
+							$result = $this->RefreshSuiteAccessToken();
+							$this->SetSuiteAccessToken($result);
 						} else if ("PROVIDER_ACCESS_TOKEN" == $tokenType) {
-							$this->RefreshProviderAccessToken();
+							$result = $this->RefreshProviderAccessToken();
+							$this->SetProviderAccessToken($result);
 						}
 						$retryCnt += 1;
 						continue;
