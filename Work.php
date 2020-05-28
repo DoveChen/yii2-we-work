@@ -20,6 +20,7 @@
 	use dovechen\yii2\weWork\src\dataStructure\ExternalContactWay;
 	use dovechen\yii2\weWork\src\dataStructure\LinkedcorpMessage;
 	use dovechen\yii2\weWork\src\dataStructure\Message;
+	use dovechen\yii2\weWork\src\dataStructure\MsgAuditCheckAgree;
 	use dovechen\yii2\weWork\src\dataStructure\Tag;
 	use dovechen\yii2\weWork\src\dataStructure\User;
 	use dovechen\yii2\weWork\src\dataStructure\UserInfoByCode;
@@ -936,6 +937,31 @@
 		public function AgentList ()
 		{
 			self::_HttpCall(self::AGENT_LIST);
+
+			return $this->repJson;
+		}
+
+		public function GetPermitUserList ()
+		{
+			self::_HttpCall(self::GET_PERMIT_USER_LIST);
+
+			return $this->repJson;
+		}
+
+		public function CheckSingleAgree (MsgAuditCheckAgree $msgAuditCheck)
+		{
+			MsgAuditCheckAgree::CheckSingleAgreeArgs($msgAuditCheck);
+			$args = MsgAuditCheckAgree::SetSingleAgreeArgs($msgAuditCheck);
+			self::_HttpCall(self::CHECK_SINGLE_AGREE, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		public function CheckRoomAgree (MsgAuditCheckAgree $msgAuditCheck)
+		{
+			MsgAuditCheckAgree::CheckRoomAgreeArgs($msgAuditCheck);
+			$args = MsgAuditCheckAgree::SetRoomAgreeArgs($msgAuditCheck);
+			self::_HttpCall(self::CHECK_ROOM_AGREE, 'POST', $args);
 
 			return $this->repJson;
 		}
