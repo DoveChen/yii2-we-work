@@ -11,6 +11,7 @@
 	 * @property string $template_id        欢迎语素材id
 	 * @property array  $external_userid    客户的外部联系人id列表，不可与sender同时为空，最多可传入1万个客户
 	 * @property string $sender             发送企业群发消息的成员userid，不可与external_userid同时为空
+	 * @property string $chat_type          群发任务的类型，默认为single，表示发送给客户，group表示发送给客户群
 	 * @property array  $text               消息文本
 	 * @property array  $image              图片
 	 * @property array  $link               图文
@@ -39,6 +40,11 @@
 				$template->external_userid = $templateExternalUserid;
 			}
 
+			$templateTemplateId = Utils::arrayGet($arr, 'template_id');
+			if (!is_null($templateTemplateId)) {
+				$template->template_id = $templateTemplateId;
+			}
+
 			$templateText = Utils::arrayGet($arr, 'text');
 			if (!is_null($templateText)) {
 				$template->text = ExternalContactMsgTemplateText::parseFromArray($templateText);
@@ -59,6 +65,15 @@
 				$template->miniprogram = ExternalContactMsgTemplateMiniprogram::parseFromArray($templateMini);
 			}
 
+			$sender = Utils::arrayGet($arr, 'sender');
+			if (!is_null($sender)) {
+				$template->sender = $sender;
+			}
+
+			$chat_type = Utils::arrayGet($arr, 'chat_type');
+			if (!is_null($chat_type)) {
+				$template->chat_type = $chat_type;
+			}
 			return $template;
 		}
 
@@ -70,7 +85,7 @@
 		 */
 		public static function checkMsgTemplateAddArgs ($msgTemplate)
 		{
-			if (!Utils::notEmptyArray($msgTemplate->external_userid) && !Utils::notEmptyArray($msgTemplate->sender)) {
+			if (!Utils::notEmptyArray($msgTemplate->external_userid) && !Utils::notEmptyStr($msgTemplate->sender)) {
 				throw new \ParameterError('input error paramter.');
 			}
 

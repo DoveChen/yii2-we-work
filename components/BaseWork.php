@@ -404,10 +404,11 @@
 		 * @param      $url
 		 * @param bool $refreshTokenWhenExpired
 		 *
-		 * @return \http|mixed
+		 * @return bool|\http|string
 		 *
 		 * @throws \HttpError
 		 * @throws \NetWorkError
+		 * @throws \QyApiError
 		 */
 		protected function _HttpGetParseToJson ($url, $refreshTokenWhenExpired = true)
 		{
@@ -438,7 +439,7 @@
 				$this->repRawStr = HttpUtils::httpGet($realUrl);
 
 				if (!Utils::notEmptyStr($this->repRawStr))
-					throw new QyApiError("empty response");
+					throw new \QyApiError("empty response");
 
 				$this->repJson = json_decode($this->repRawStr, true);
 				if (strpos($this->repRawStr, "errcode") !== false) {
@@ -475,6 +476,7 @@
 		 *
 		 * @throws \HttpError
 		 * @throws \NetWorkError
+		 * @throws \QyApiError
 		 */
 		protected function _HttpPostParseToJson ($url, $args, $refreshTokenWhenExpired = true, $isPostFile = false)
 		{
@@ -511,7 +513,7 @@
 				$this->repRawStr = HttpUtils::httpPost($realUrl, $postData);
 
 				if (!Utils::notEmptyStr($this->repRawStr))
-					throw new QyApiError("empty response");
+					throw new \QyApiError("empty response");
 
 				$json          = json_decode($this->repRawStr, true/*to array*/);
 				$this->repJson = $json;
@@ -539,6 +541,7 @@
 		}
 
 		/**
+		 * @throws \ParameterError
 		 * @throws \QyApiError
 		 */
 		protected function _CheckErrCode ()
@@ -549,7 +552,7 @@
 				return;
 
 			if (!is_array($rsp))
-				throw new ParameterError("invalid type " . gettype($rsp));
+				throw new \ParameterError("invalid type " . gettype($rsp));
 			if (!array_key_exists("errcode", $rsp)) {
 				return;
 			}
