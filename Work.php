@@ -530,7 +530,7 @@
 		public function ECAddContactWay (ExternalContactWay $externalContactWay)
 		{
 			ExternalContactWay::CheckExternalContactWayAddArgs($externalContactWay);
-			$args = Utils::Object2Array($externalContactWay);
+			$args = Utils::Object2EmptyArray($externalContactWay);
 			self::_HttpCall(self::EXTERNAL_CONTACT_ADD_CONTACT_WAY, 'POST', $args);
 
 			return $this->repJson;
@@ -547,7 +547,7 @@
 		public function ECUpdateContactWay (ExternalContactWay $externalContactWay)
 		{
 			ExternalContactWay::CheckExternalContactWayUpdateArgs($externalContactWay);
-			$args = Utils::Object2Array($externalContactWay);
+			$args = Utils::Object2EmptyArray($externalContactWay);
 			self::_HttpCall(self::EXTERNAL_CONTACT_UPDATE_CONTACT_WAY, 'POST', $args);
 
 			return $this->repJson;
