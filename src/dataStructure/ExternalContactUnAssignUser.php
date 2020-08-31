@@ -45,7 +45,8 @@
 
 			if (!is_null($unAssignUser)) {
 				foreach ($unAssignUser as $item) {
-					array_push($unAssignUserInfo, ExternalContactUnAssignUser::parseFromArray($item));
+					$data = Utils::Object2Array(ExternalContactUnAssignUser::parseFromArray($item));
+					array_push($unAssignUserInfo, $data);
 				}
 			}
 

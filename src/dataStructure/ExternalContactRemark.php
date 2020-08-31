@@ -19,6 +19,46 @@
 	 */
 	class ExternalContactRemark
 	{
+		/**
+		 * @param $arr
+		 *
+		 * @return ExternalContactRemark
+		 *
+		 */
+		public static function parseFromArray ($arr)
+		{
+			$contactRemark = new ExternalContactRemark();
+			$userid        = Utils::arrayGet($arr, 'userid');
+			if (!is_null($userid)) {
+				$contactRemark->userid = $userid;
+			}
+			$externalUserId = Utils::arrayGet($arr, 'external_userid');
+			if (!is_null($externalUserId)) {
+				$contactRemark->external_userid = $externalUserId;
+			}
+			$remark = Utils::arrayGet($arr, 'remark');
+			if (!is_null($remark)) {
+				$contactRemark->remark = $remark;
+			}
+			$description = Utils::arrayGet($arr, 'description');
+			if (!is_null($description)) {
+				$contactRemark->description = $description;
+			}
+			$remarkCompany = Utils::arrayGet($arr, 'remark_company');
+			if (!is_null($remarkCompany)) {
+				$contactRemark->remark_company = $remarkCompany;
+			}
+			$remarkMobiles = Utils::arrayGet($arr, 'remark_mobiles');
+			if (!is_null($remarkMobiles)) {
+				$contactRemark->remark_mobiles = $remarkMobiles;
+			}
+			$mediaId = Utils::arrayGet($arr, 'remark_pic_mediaid');
+			if (!is_null($mediaId)) {
+				$contactRemark->remark_pic_mediaid = $mediaId;
+			}
+
+			return $contactRemark;
+		}
 
 		/**
 		 * @param ExternalContactRemark $externalContactRemark
@@ -30,8 +70,8 @@
 			Utils::checkNotEmptyStr($externalContactRemark->userid, 'userid');
 			Utils::checkNotEmptyStr($externalContactRemark->external_userid, 'external userid');
 
-			if (!Utils::notEmptyStr($externalContactRemark->remark) && !Utils::notEmptyStr($externalContactRemark->description) && !Utils::notEmptyStr($externalContactRemark->remark_company) && !Utils::notEmptyStr($externalContactRemark->remark_mobiles) && !Utils::notEmptyStr($externalContactRemark->remark_pic_mediaid)) {
-				throw new \ParameterError('input error parameter.');
-			}
+//			if (!Utils::notEmptyStr($externalContactRemark->remark) && !Utils::notEmptyStr($externalContactRemark->description) && !Utils::notEmptyStr($externalContactRemark->remark_company) && !Utils::notEmptyArray($externalContactRemark->remark_mobiles) && !Utils::notEmptyStr($externalContactRemark->remark_pic_mediaid)) {
+//				throw new \ParameterError('input error parameter.');
+//			}
 		}
 	}

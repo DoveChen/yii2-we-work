@@ -93,6 +93,7 @@
 		const EXTERNAL_CONTACT_GET_UNASSIGNED_LIST = '/cgi-bin/externalcontact/get_unassigned_list?access_token=ACCESS_TOKEN';  // 获取离职成员的客户列表 POST
 		const EXTERNAL_CONTACT_TRANSFER = '/cgi-bin/externalcontact/transfer?access_token=ACCESS_TOKEN';  // 离职成员的外部联系人再分配 POST
 		const EXTERNAL_CONTACT_GROUP_CHAT_TRANSFER = '/cgi-bin/externalcontact/groupchat/transfer?access_token=ACCESS_TOKEN';  // 离职成员的群再分配 POST
+		const EXTERNAL_CONTACT_GET_TRANSFER_RESULT = '/cgi-bin/externalcontact/get_transfer_result?access_token=ACCESS_TOKEN';  // 查询客户接替结果 POST
 
 		/* 统计管理 */
 		const EXTERNAL_CONTACT_GET_USER_BEHAVIOR_DATA = '/cgi-bin/externalcontact/get_user_behavior_data?access_token=ACCESS_TOKEN'; // 获取联系客户统计数据 POST

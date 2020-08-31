@@ -584,7 +584,7 @@
 		public function ECRemark (ExternalContactRemark $externalContactRemark)
 		{
 			ExternalContactRemark::CheckExternalContactRmarkArgs($externalContactRemark);
-			$args = Utils::Object2Array($externalContactRemark);
+			$args = Utils::Object2EmptyArray($externalContactRemark);
 			self::_HttpCall(self::EXTERNAL_CONTACT_REMARK, 'POST', $args);
 
 			return $this->repJson;
@@ -780,6 +780,14 @@
 			Utils::checkNotEmptyStr($newOwner, 'new_owner');
 
 			self::_HttpCall(self::EXTERNAL_CONTACT_GROUP_CHAT_TRANSFER, 'POST', ['chat_id_list' => $chadIdList, 'new_owner' => $newOwner]);
+
+			return $this->repJson;
+		}
+
+		public function EContactGetTransferResult ($handoverData)
+		{
+			$args = Utils::Object2Array($handoverData);
+			self::_HttpCall(self::EXTERNAL_CONTACT_GET_TRANSFER_RESULT, 'POST',$args);
 
 			return $this->repJson;
 		}

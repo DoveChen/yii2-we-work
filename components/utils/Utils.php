@@ -136,6 +136,27 @@
 		}
 
 		/**
+		 * 对象 转 数组 空时不过滤
+		 *
+		 * @param object $object 对象
+		 *
+		 * @return array
+		 */
+		public static function Object2EmptyArray ($object)
+		{
+			if (is_object($object) || is_array($object)) {
+				$array = [];
+				foreach ($object as $key => $value) {
+					$array[$key] = self::Object2EmptyArray($value);
+				}
+
+				return $array;
+			} else {
+				return $object;
+			}
+		}
+
+		/**
 		 * 数组转XML
 		 *
 		 * @param       $rootName
