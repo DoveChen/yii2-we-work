@@ -23,11 +23,14 @@
 		{
 			$externalProfile = new ExternalProfile();
 
-			$externalProfile->external_corp_name = Utils::arrayGet($arr, "external_corp_name");
-			$externalProfile->external_attr      = [];
+			$externalCorpName = Utils::arrayGet($arr, "external_corp_name");
+			if (!empty($externalCorpName)) {
+				$externalProfile->external_corp_name = $externalCorpName;
+			}
 
 			$externalAttr = Utils::arrayGet($arr, "external_attr");
 			if (!is_null($externalAttr) && !empty($externalAttr)) {
+				$externalProfile->external_attr      = [];
 				foreach ($externalAttr as $attr) {
 					array_push($externalProfile->external_attr, AttrItem::parseFromArray($attr));
 				}

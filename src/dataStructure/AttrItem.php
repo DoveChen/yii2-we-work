@@ -35,11 +35,11 @@
 
 					break;
 				case 1:
-					$attrItem->web = AttrItemText::parseFromArray(Utils::arrayGet($arr, 'web'));
+					$attrItem->web = AttrItemWeb::parseFromArray(Utils::arrayGet($arr, 'web'));
 
 					break;
 				case 2:
-					$attrItem->miniprogram = AttrItemText::parseFromArray(Utils::arrayGet($arr, 'miniprogram'));
+					$attrItem->miniprogram = AttrItemMiniprogram::parseFromArray(Utils::arrayGet($arr, 'miniprogram'));
 
 					break;
 			}
