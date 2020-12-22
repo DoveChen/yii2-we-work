@@ -10,6 +10,7 @@
 	use dovechen\yii2\weWork\src\dataStructure\BatchJobArgs;
 	use dovechen\yii2\weWork\src\dataStructure\Department;
 	use dovechen\yii2\weWork\src\dataStructure\ExternalContact;
+	use dovechen\yii2\weWork\src\dataStructure\ExternalContactBatchGetByUser;
 	use dovechen\yii2\weWork\src\dataStructure\ExternalContactBehavior;
 	use dovechen\yii2\weWork\src\dataStructure\ExternalContactGroupChat;
 	use dovechen\yii2\weWork\src\dataStructure\ExternalContactMsgTemplate;
@@ -581,6 +582,20 @@
 			return ExternalContact::parseFromArray($externalContact);
 		}
 
+		public function ECBatchGetByUser (ExternalContactBatchGetByUser $batchGetByUser)
+		{
+			ExternalContactBatchGetByUser::CheckExternalContactBatchGetByUserArgs($batchGetByUser);
+			$args = Utils::Object2EmptyArray($batchGetByUser);
+			self::_HttpCall(self::EXTERNAL_CONTACT_BATCH_GET_BY_USER, 'POST', $args);
+
+			$externalContactListInfo = [
+				'external_contact_list' => Utils::arrayGet($this->repJson, 'external_contact_list'),
+				'next_cursor'           => Utils::arrayGet($this->repJson, 'next_cursor')
+			];
+
+			return $externalContactListInfo;
+		}
+
 		public function ECRemark (ExternalContactRemark $externalContactRemark)
 		{
 			ExternalContactRemark::CheckExternalContactRmarkArgs($externalContactRemark);
@@ -787,7 +802,7 @@
 		public function EContactGetTransferResult ($handoverData)
 		{
 			$args = Utils::Object2Array($handoverData);
-			self::_HttpCall(self::EXTERNAL_CONTACT_GET_TRANSFER_RESULT, 'POST',$args);
+			self::_HttpCall(self::EXTERNAL_CONTACT_GET_TRANSFER_RESULT, 'POST', $args);
 
 			return $this->repJson;
 		}

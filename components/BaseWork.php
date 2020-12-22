@@ -67,6 +67,7 @@
 		/* 客户管理 */
 		const EXTERNAL_CONTACT_LIST = '/cgi-bin/externalcontact/list?access_token=ACCESS_TOKEN';    // 获取客户列表 GET
 		const EXTERNAL_CONTACT_GET = '/cgi-bin/externalcontact/get?access_token=ACCESS_TOKEN';    // 获取客户详情 GET
+		const EXTERNAL_CONTACT_BATCH_GET_BY_USER = '/cgi-bin/externalcontact/batch/get_by_user?access_token=ACCESS_TOKEN';    // 批量获取客户详情 POST
 		const EXTERNAL_CONTACT_REMARK = '/cgi-bin/externalcontact/remark?access_token=ACCESS_TOKEN';    // 修改客户备注信息 POST
 
 		/* 客户标签管理 */
@@ -463,6 +464,19 @@
 					}
 				}
 
+				$save_path = '/work/' . date('Ymd') . '/';
+				$save_dir  = \Yii::getAlias('@upload') . $save_path;
+				if (!file_exists($save_dir) && !mkdir($save_dir, 0755, true)) {
+				}
+
+				@file_put_contents($save_dir . 'work-api.txt', json_encode([
+						'time'                    => date('Y-m-d H:i'),
+						'errcode'                 => isset($this->repJson["errcode"]) ? $this->repJson["errcode"] : 0,
+						'realUrl'                 => $realUrl,
+						'method'                  => 'get',
+						'refreshTokenWhenExpired' => $refreshTokenWhenExpired,
+					], JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND);
+
 				return $this->repRawStr;
 			}
 		}
@@ -537,6 +551,21 @@
 					}
 				}
 
+				$save_path = '/work/' . date('Ymd') . '/';
+				$save_dir  = \Yii::getAlias('@upload') . $save_path;
+				if (!file_exists($save_dir) && !mkdir($save_dir, 0755, true)) {
+				}
+
+				@file_put_contents($save_dir . 'work-api.txt', json_encode([
+						'time'                    => date('Y-m-d H:i'),
+						'errcode'                 => isset($this->repJson["errcode"]) ? $this->repJson["errcode"] : 0,
+						'realUrl'                 => $realUrl,
+						'method'                  => 'post',
+						'args'                    => $args,
+						'refreshTokenWhenExpired' => $refreshTokenWhenExpired,
+						'isPostFile'              => $isPostFile,
+					], JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND);
+
 				return $json;
 			}
 		}
@@ -558,6 +587,13 @@
 				return;
 			}
 			$errCode = $rsp["errcode"];
+			$errInfo = errorCode::getErrorInfo($errCode);
+
+			if (!is_null($errInfo)) {
+				$raw           = json_decode($raw, true);
+				$raw['errmsg'] = $errInfo;
+				$raw           = json_encode($raw, JSON_UNESCAPED_UNICODE);
+			}
 			if (!is_int($errCode))
 				throw new \QyApiError(
 					"invalid errcode type " . gettype($errCode) . ":" . $raw);
