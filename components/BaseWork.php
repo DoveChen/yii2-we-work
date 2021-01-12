@@ -295,6 +295,8 @@
 		/* 获取会话同意情况 */
 		const CHECK_SINGLE_AGREE = '/cgi-bin/msgaudit/check_single_agree?access_token=ACCESS_TOKEN'; // 单聊请求地址
 		const CHECK_ROOM_AGREE = '/cgi-bin/msgaudit/check_room_agree?access_token=ACCESS_TOKEN'; // 群聊请求地址
+		/* 获取会话内容存档内部群信息 */
+		const GROUP_CHAT_GET = '/cgi-bin/msgaudit/groupchat/get?access_token=ACCESS_TOKEN'; // 获取会话内容存档内部群信息请求地址
 
 		protected function GetAccessToken ($force = false)
 		{
