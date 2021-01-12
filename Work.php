@@ -997,4 +997,89 @@
 
 			return $this->repJson;
 		}
+
+		public function GetMomentList ($startTime, $endTime, $creator = '', $filterType = 2, $cursor = '', $limit = 100)
+		{
+			Utils::checkNotEmptyStr($startTime, 'start_time');
+			Utils::checkNotEmptyStr($endTime, 'end_time');
+			if ($limit < 1 || $limit > 100) {
+				throw new \ParameterError('limit must be inter and lt 100');
+			}
+			$args = [
+				'start_time'  => $startTime,
+				'end_time'    => $endTime,
+				'creator'     => $creator,
+				'filter_type' => $filterType,
+				'cursor'      => $cursor,
+				'limit'       => $limit,
+			];
+			self::_HttpCall(self::GET_MOMENT_LIST, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		public function GetMomentTask ($momentId, $cursor = '', $limit = 500)
+		{
+			Utils::checkNotEmptyStr($momentId, 'moment_id');
+			if ($limit < 1 || $limit > 1000) {
+				throw new \ParameterError('limit must be inter and lt 1000');
+			}
+			$args = [
+				'moment_id' => $momentId,
+				'cursor'    => $cursor,
+				'limit'     => $limit,
+			];
+			self::_HttpCall(self::GET_MOMENT_TASK, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		public function GetMomentCustomerList ($momentId, $userId, $cursor = '', $limit = 500)
+		{
+			Utils::checkNotEmptyStr($momentId, 'moment_id');
+			Utils::checkNotEmptyStr($userId, 'user_id');
+			if ($limit < 1 || $limit > 1000) {
+				throw new \ParameterError('limit must be inter and lt 1000');
+			}
+			$args = [
+				'moment_id' => $momentId,
+				'userid'    => $userId,
+				'cursor'    => $cursor,
+				'limit'     => $limit,
+			];
+			self::_HttpCall(self::GET_MOMENT_CUSTOMER_LIST, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		public function GetMomentSendResult ($momentId, $userId, $cursor = '', $limit = 3000)
+		{
+			Utils::checkNotEmptyStr($momentId, 'moment_id');
+			Utils::checkNotEmptyStr($userId, 'user_id');
+			if ($limit < 1 || $limit > 5000) {
+				throw new \ParameterError('limit must be inter and lt 5000');
+			}
+			$args = [
+				'moment_id' => $momentId,
+				'userid'    => $userId,
+				'cursor'    => $cursor,
+				'limit'     => $limit,
+			];
+			self::_HttpCall(self::GET_MOMENT_SEND_RESULT, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		public function GetMomentComments ($momentId, $userId)
+		{
+			Utils::checkNotEmptyStr($momentId, 'moment_id');
+			Utils::checkNotEmptyStr($userId, 'user_id');
+			$args = [
+				'moment_id' => $momentId,
+				'userid'    => $userId,
+			];
+			self::_HttpCall(self::GET_MOMENT_COMMENTS, 'POST', $args);
+
+			return $this->repJson;
+		}
 	}

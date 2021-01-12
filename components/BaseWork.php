@@ -297,6 +297,12 @@
 		const CHECK_ROOM_AGREE = '/cgi-bin/msgaudit/check_room_agree?access_token=ACCESS_TOKEN'; // 群聊请求地址
 		/* 获取会话内容存档内部群信息 */
 		const GROUP_CHAT_GET = '/cgi-bin/msgaudit/groupchat/get?access_token=ACCESS_TOKEN'; // 获取会话内容存档内部群信息请求地址
+		/* 获取客户朋友圈 */
+		const GET_MOMENT_LIST = '/cgi-bin/externalcontact/get_moment_list?access_token=ACCESS_TOKEN'; // 获取企业全部的发表列表
+		const GET_MOMENT_TASK = '/cgi-bin/externalcontact/get_moment_task?access_token=ACCESS_TOKEN'; // 获取客户朋友圈企业发表的列表
+		const GET_MOMENT_CUSTOMER_LIST = '/cgi-bin/externalcontact/get_moment_customer_list?access_token=ACCESS_TOKEN'; // 获取客户朋友圈发表时选择的可见范围
+		const GET_MOMENT_SEND_RESULT = '/cgi-bin/externalcontact/get_moment_send_result?access_token=ACCESS_TOKEN'; // 获取客户朋友圈发表后的可见客户列表
+		const GET_MOMENT_COMMENTS = '/cgi-bin/externalcontact/get_moment_comments?access_token=ACCESS_TOKEN'; // 获取客户朋友圈的互动数据
 
 		protected function GetAccessToken ($force = false)
 		{
