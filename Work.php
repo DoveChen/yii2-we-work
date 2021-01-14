@@ -1008,11 +1008,15 @@
 			$args = [
 				'start_time'  => $startTime,
 				'end_time'    => $endTime,
-				'creator'     => $creator,
 				'filter_type' => $filterType,
 				'cursor'      => $cursor,
 				'limit'       => $limit,
 			];
+
+			if (!empty($creator)) {
+				$args['creator'] = $creator;
+			}
+
 			self::_HttpCall(self::GET_MOMENT_LIST, 'POST', $args);
 
 			return $this->repJson;
