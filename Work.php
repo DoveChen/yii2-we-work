@@ -992,8 +992,8 @@
 		public function GroupChatGet ($roomId)
 		{
 
-			Utils::checkNotEmptyStr($roomid, 'roomid');
-			self::_HttpCall(self::GROUP_CHAT_GET, 'POST', ['roomid' => $roomid]);
+			Utils::checkNotEmptyStr($roomId, 'roomid');
+			self::_HttpCall(self::GROUP_CHAT_GET, 'POST', ['roomid' => $roomId]);
 
 			return $this->repJson;
 		}
