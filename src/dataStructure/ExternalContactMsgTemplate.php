@@ -16,6 +16,7 @@
 	 * @property array  $image              图片
 	 * @property array  $link               图文
 	 * @property array  $miniprogram        小程序
+	 * @property array  $attachments        附件
 	 *
 	 * @package dovechen\yii2\weWork\src\dataStructure
 	 */
@@ -70,6 +71,11 @@
 				$template->sender = $sender;
 			}
 
+			$attachments = Utils::arrayGet($arr, 'attachments');
+			if (!is_null($attachments)) {
+				$template->attachments = $attachments;
+			}
+
 			$chat_type = Utils::arrayGet($arr, 'chat_type');
 			if (!is_null($chat_type)) {
 				$template->chat_type = $chat_type;
@@ -116,7 +122,7 @@
 			 * image、link和miniprogram只能有一个，如果三者同时填，则按image、link、miniprogram的优先顺序取参，也就是说，如果image与link同时传值，则只有image生效。
 			 * media_id可以通过素材管理接口获得。
 			 */
-			if (empty($msgTemplate->text) && empty($msgTemplate->image) && empty($msgTemplate->link) && empty($msgTemplate->miniprogram)) {
+			if (empty($msgTemplate->text) && empty($msgTemplate->image) && empty($msgTemplate->link) && empty($msgTemplate->miniprogram) && empty($msgTemplate->attachments)) {
 				throw new \ParameterError('input error paramter.');
 			}
 		}
