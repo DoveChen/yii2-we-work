@@ -34,6 +34,7 @@
 		const BATCH_INVITE = '/cgi-bin/batch/invite?access_token=ACCESS_TOKEN';    // 邀请成员 POST
 		const USER_GET_USERID = '/cgi-bin/user/getuserid?access_token=ACCESS_TOKEN';    // 手机号获取userid POST
 		const CORP_GET_JOIN_QECODE = '/cgi-bin/corp/get_join_qrcode?access_token=ACCESS_TOKEN'; // 获取加入企业二维码 GET
+		const GET_MOBILE_HASHCODE = '/cgi-bin/user/get_mobile_hashcode?access_token=ACCESS_TOKEN'; // 获取手机号随机串 POST
 
 		/* 部门管理 */
 		const DEPARTMENT_CREATE = '/cgi-bin/department/create?access_token=ACCESS_TOKEN';   // 创建部门 POST

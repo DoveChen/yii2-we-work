@@ -363,6 +363,14 @@
 			$joinQrcode = Utils::arrayGet($this->repJson, 'join_qrcode');
 		}
 
+		public function getMobileHashcode (&$mobile, $state = '')
+		{
+			Utils::checkIsUInt($mobile, 'mobile');
+			self::_HttpCall(self::GET_MOBILE_HASHCODE, 'POST', ['mobile' => $mobile, 'state' => $state]);
+
+			$mobile = Utils::arrayGet($this->repJson, 'hashcode');
+		}
+
 		/* 部门管理 */
 		public function departmentCreate (Department $department, &$departmentId)
 		{
