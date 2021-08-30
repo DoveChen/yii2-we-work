@@ -34,6 +34,7 @@
 	{
 		/**
 		 * 每个企业都拥有唯一的corpid，获取此信息可在管理后台“我的企业”－“企业信息”下查看“企业ID”（需要有管理员权限）
+		 *
 		 * @var string
 		 */
 		public $corpid;
@@ -43,32 +44,38 @@
 		 * 基础应用secret。某些基础应用（如“审批”“打卡”应用），支持通过API进行操作。在管理后台->“应用与小程序”->“应用->”“基础”，点进某个应用，点开“API”小按钮，即可看到。
 		 * 通讯录管理secret。在“管理工具”-“通讯录同步”里面查看（需开启“API接口同步”）；
 		 * 外部联系人管理secret。在“客户联系”栏，点开“API”小按钮，即可看到。
+		 *
 		 * @var string
 		 */
 		public $secret;
 		/**
 		 * access_token是企业后台去企业微信的后台获取信息时的重要票据，由corpid和secret产生。所有接口在通信时都需要携带此信息用于验证接口的访问权限
+		 *
 		 * @var string
 		 */
 		public $access_token;
 		/**
 		 * 凭证的有效时间（秒）
+		 *
 		 * @var string
 		 */
 		public $access_token_expire;
 		/**
 		 * 用于计算签名，由英文或数字组成且长度不超过32位的自定义字符串。
+		 *
 		 * @var string
 		 */
 		protected $token;
 		/**
 		 * 用于消息内容加密，由英文或数字组成且长度为43位的自定义字符串。
+		 *
 		 * @var string
 		 */
 		protected $encodingAesKey;
 
 		/**
 		 * 数据缓存前缀
+		 *
 		 * @var string
 		 */
 		protected $cachePrefix = 'cache_work_wx';
@@ -1094,4 +1101,562 @@
 
 			return $this->repJson;
 		}
+
+		/* 微信客服 */
+		/**
+		 * 添加客服帐号
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfAccountAdd
+		 *
+		 * @param string $name     // 客服帐号名称。不多于16个字符
+		 * @param string $media_id // 客服头像临时素材。可以调用上传临时素材接口获取。不多于128个字节
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfAccountAdd (string $name, string $media_id)
+		{
+			Utils::checkNotEmptyStr($name, 'name');
+			Utils::checkNotEmptyStr($media_id, 'media_id');
+			$args = [
+				'name'     => $name,
+				'media_id' => $media_id
+			];
+
+			self::_HttpCall(self::WECHAT_KF_ACCOUNT_ADD, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 删除客服帐号
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfAccountDel
+		 *
+		 * @param string $open_kfid //客服帐号ID。不多于64字节
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfAccountDel (string $open_kfid)
+		{
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			$args = [
+				'open_kfid' => $open_kfid
+			];
+
+			self::_HttpCall(self::WECHAT_KF_ACCOUNT_DEL, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 修改客服账号
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfAccountUpdate
+		 *
+		 * @param string $open_kfid //客服帐号ID。不多于64字节
+		 * @param string $name      // 客服帐号名称。不多于16个字符
+		 * @param string $media_id  // 客服头像临时素材。可以调用上传临时素材接口获取。不多于128个字节
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfAccountUpdate (string $open_kfid, string $name = '', string $media_id = '')
+		{
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			$args = [
+				'open_kfid' => $open_kfid
+			];
+
+			if (!empty($name)) {
+				$args['name'] = $name;
+			}
+
+			if (!empty($media_id)) {
+				$args['name'] = $media_id;
+			}
+
+			self::_HttpCall(self::WECHAT_KF_ACCOUNT_UPDATE, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 获取客服账号列表
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfAccountList
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \QyApiError
+		 */
+		public function kfAccountList ()
+		{
+			self::_HttpCall(self::WECHAT_KF_ACCOUNT_LIST, 'GET');
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 获取客服帐号链接
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfAddContactWay
+		 *
+		 * @param string $open_kfid //客服帐号ID。不多于64字节
+		 * @param string $scene     //场景值，字符串类型，由开发者自定义。不多于32字节 字符串取值范围(正则表达式)：[0-9a-zA-Z_-]*
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfAddContactWay (string $open_kfid, string $scene = '')
+		{
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			$args = [
+				'open_kfid' => $open_kfid
+			];
+
+			if (!empty($scene)) {
+				$args['scene'] = $scene;
+			}
+
+			self::_HttpCall(self::WECHAT_KF_ADD_CONTACT_WAY, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 添加接待人员
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfServicerAdd
+		 *
+		 * @param string $open_kfid   //客服帐号ID
+		 * @param array  $userid_list //接待人员userid列表。第三方应用填密文userid，即open_userid
+		 *                            可填充个数：1 ~ 100。超过100个需分批调用。
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfServicerAdd (string $open_kfid, array $userid_list)
+		{
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			Utils::checkNotEmptyArray($userid_list, 'userid_list');
+
+			if (count($userid_list) > 100) {
+				$num          = ceil(count($userid_list) / 100);
+				$chunk_result = array_chunk($userid_list, $num);
+				$result       = [];
+				$result_list  = [];
+				foreach ($chunk_result as $list) {
+					$args = [
+						'open_kfid'   => $open_kfid,
+						'userid_list' => $list
+					];
+
+					self::_HttpCall(self::WECHAT_KF_SERVICER_ADD, 'POST', $args);
+					$result_list[] = $this->repJson;
+				}
+				if (!empty($result_list)) {
+					$result = array_merge($result, ...$result_list);
+				}
+
+			} else {
+				$args = [
+					'open_kfid'   => $open_kfid,
+					'userid_list' => $userid_list
+				];
+
+				self::_HttpCall(self::WECHAT_KF_SERVICER_ADD, 'POST', $args);
+				$result = $this->repJson;
+			}
+
+			return $result;
+		}
+
+		/**
+		 * 删除接待人员
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfServicerDel
+		 *
+		 * @param string $open_kfid   //客服帐号ID
+		 * @param array  $userid_list //接待人员userid列表。第三方应用填密文userid，即open_userid
+		 *                            可填充个数：1 ~ 100。超过100个需分批调用。
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfServicerDel (string $open_kfid, array $userid_list)
+		{
+			Utils::checkNotEmptyStr($name, 'open_kfid');
+			Utils::checkNotEmptyArray($media_id, 'userid_list');
+
+			if (count($userid_list) > 100) {
+				$num          = ceil(count($userid_list) / 100);
+				$chunk_result = array_chunk($userid_list, $num);
+				$result       = [];
+				$result_list  = [];
+				foreach ($chunk_result as $list) {
+					$args = [
+						'open_kfid'   => $open_kfid,
+						'userid_list' => $list
+					];
+
+					self::_HttpCall(self::WECHAT_KF_SERVICER_DEL, 'POST', $args);
+					$result_list[] = $this->repJson;
+				}
+				$result = array_merge($result, ...$result_list);
+			} else {
+				$args = [
+					'open_kfid'   => $open_kfid,
+					'userid_list' => $userid_list
+				];
+
+				self::_HttpCall(self::WECHAT_KF_SERVICER_DEL, 'POST', $args);
+				$result = $this->repJson;
+			}
+
+			return $result_list;
+		}
+
+		/**
+		 * 获取接待人员列表
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfServicerList
+		 *
+		 * @param $open_kfid //客服帐号ID
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfServicerList ($open_kfid)
+		{
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			$args = [
+				'open_kfid' => $open_kfid
+			];
+			self::_HttpCall(self::WECHAT_KF_SERVICER_LIST, 'GET', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfServiceStateGet
+		 *
+		 * @param $open_kfid       //客服帐号ID
+		 * @param $external_userid //微信客户的external_userid
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfServiceStateGet ($open_kfid, $external_userid)
+		{
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			Utils::checkNotEmptyStr($external_userid, 'external_userid');
+			$args = [
+				'open_kfid'       => $open_kfid,
+				'external_userid' => $external_userid
+			];
+
+			self::_HttpCall(self::WECHAT_KF_SERVICER_STATE_GET, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 变更会话状态
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfServiceStateTrans
+		 *
+		 * @param $open_kfid       //客服帐号ID
+		 * @param $external_userid //微信客户的external_userid
+		 * @param $service_state   //变更的目标状态，状态定义和所允许的变更可参考概述中的流程图和表格
+		 * @param $servicer_userid //接待人员的userid，当state=3时要求必填，接待人员须处于“正在接待”中。
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfServiceStateTrans ($open_kfid, $external_userid, $service_state, $servicer_userid)
+		{
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			Utils::checkNotEmptyStr($external_userid, 'external_userid');
+			Utils::checkIsUInt($service_state, 'service_state');
+
+			$args = [
+				'open_kfid'       => $open_kfid,
+				'external_userid' => $external_userid,
+				'service_state'   => $service_state
+			];
+
+			if ($service_state == 3) {
+				Utils::checkNotEmptyStr($servicer_userid, 'servicer_userid');
+				$args['servicer_userid'] = $servicer_userid;
+			}
+
+			self::_HttpCall(self::WECHAT_KF_SERVICER_STATE_TRANS, "POST", $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 获取消息
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfSyncMsg
+		 *
+		 * @param string $token  //回调事件返回的token字段，10分钟内有效；可不填，如果不填接口有严格的频率限制。不多于128字节
+		 * @param int    $limit  //期望请求的数据量，默认值和最大值都为1000。注意：可能会出现返回条数少于limit的情况，需结合返回的has_more字段判断是否继续请求。
+		 * @param string $cursor //上一次调用时返回的next_cursor，第一次拉取可以不填。不多于64字节
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \QyApiError
+		 */
+		public function kfSyncMsg (string $token = '', int $limit = 1000, string $cursor = '')
+		{
+			$args = [];
+			if (!empty($token)) {
+				$args = [
+					'token' => $token,
+					'limit' => $limit
+				];
+			}
+
+			if (!empty($cursor)) {
+				$args['cursor'] = $cursor;
+			}
+
+			self::_HttpCall(self::WECHAT_KF_SYNC_MSG, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 发送消息
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfSendMsg
+		 *
+		 * @param string $touser    //指定接收消息的客户UserID
+		 * @param string $open_kfid //指定发送消息的客服帐号ID
+		 * @param string $msgtype   //消息类型，此时固定为：text
+		 * @param array  $content   //消息内容
+		 * @param string $msgid     //指定消息ID
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfSendMsg (string $touser, string $open_kfid, string $msgtype, array $content, string $msgid = '')
+		{
+			Utils::checkNotEmptyStr($touser, 'touser');
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			Utils::checkNotEmptyStr($msgtype, 'msgtype');
+			Utils::checkNotEmptyArray($content, 'content');
+			$args = [
+				'touser'    => $touser,
+				'open_kfid' => $open_kfid,
+				'msgtype'   => $msgtype,
+				$msgtype    => $content,
+			];
+
+			if (!empty($msgid)) {
+				$args['msgid'] = $msgid;
+			}
+
+			self::_HttpCall(self::WECHAT_KF_SEND_MSG, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 客户基本信息获取
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfCustomerBatchget
+		 *
+		 * @param array $external_userid_list //external_userid列表
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfCustomerBatchget (array $external_userid_list)
+		{
+			Utils::checkNotEmptyArray($external_userid_list, 'external_userid_list');
+			$args = [
+				'external_userid_list' => $external_userid_list
+			];
+
+			self::_HttpCall(self::WECHAT_KF_CUSTOMER_BATCHGET, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 获取配置的专员与客户群
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfCustomerGetUpgradeServiceConfig
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \QyApiError
+		 */
+		public function kfCustomerGetUpgradeServiceConfig ()
+		{
+			self::_HttpCall(self::WECHAT_KF_CUSTOMER_GET_UPGRADE_SERVICE_CONFIG, 'GET');
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 为客户升级为专员
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfCustomerUpgradeServiceForMember
+		 *
+		 * @param string $open_kfid       //客服帐号ID
+		 * @param string $external_userid //微信客户的external_userid
+		 * @param string $userid          //服务专员的userid
+		 * @param string $wording         //推荐语
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfCustomerUpgradeServiceForMember (string $open_kfid, string $external_userid, string $userid, string $wording)
+		{
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			Utils::checkNotEmptyStr($external_userid, 'external_userid');
+			Utils::checkNotEmptyStr($userid, 'userid');
+			Utils::checkNotEmptyArray($wording, 'wording');
+			$args = [
+				'open_kfid'       => $open_kfid,
+				'external_userid' => $external_userid,
+				'type'            => 1,
+				'member'          => [
+					'userid'  => $userid,
+					'wording' => $wording
+				]
+			];
+
+			self::_HttpCall(self::WECHAT_KF_CUSTOMER_UPGRADE_SERVICE, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 为客户升级为客户群服务
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfCustomerUpgradeServiceForChat
+		 *
+		 * @param string $open_kfid       //客服帐号ID
+		 * @param string $external_userid //微信客户的external_userid
+		 * @param string $chat_id         //客户群id
+		 * @param string $wording         //推荐语
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfCustomerUpgradeServiceForChat (string $open_kfid, string $external_userid, string $chat_id, string $wording)
+		{
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			Utils::checkNotEmptyStr($external_userid, 'external_userid');
+			Utils::checkNotEmptyStr($chat_id, 'chat_id');
+			Utils::checkNotEmptyArray($wording, 'wording');
+			$args = [
+				'open_kfid'       => $open_kfid,
+				'external_userid' => $external_userid,
+				'type'            => 2,
+				'groupchat'       => [
+					'chat_id' => $chat_id,
+					'wording' => $wording
+				]
+			];
+
+			self::_HttpCall(self::WECHAT_KF_CUSTOMER_UPGRADE_SERVICE, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 为客户取消推荐
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: kfCustomerCancelUpgradeService
+		 *
+		 * @param string $open_kfid       //客服帐号ID
+		 * @param string $external_userid //微信客户的external_userid
+		 *
+		 * @return null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function kfCustomerCancelUpgradeService (string $open_kfid, string $external_userid)
+		{
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			Utils::checkNotEmptyStr($external_userid, 'external_userid');
+			$args = [
+				'open_kfid'       => $open_kfid,
+				'external_userid' => $external_userid
+			];
+
+			self::_HttpCall(self::WECHAT_KF_CUSTOMER_CANCEL_UPGRADE_SERVICE, 'POST', $args);
+
+			return $this->repJson;
+		}
+
 	}
