@@ -70,6 +70,12 @@
 		const EXTERNAL_CONTACT_GET               = '/cgi-bin/externalcontact/get?access_token=ACCESS_TOKEN';    // 获取客户详情 GET
 		const EXTERNAL_CONTACT_BATCH_GET_BY_USER = '/cgi-bin/externalcontact/batch/get_by_user?access_token=ACCESS_TOKEN';    // 批量获取客户详情 POST
 		const EXTERNAL_CONTACT_REMARK            = '/cgi-bin/externalcontact/remark?access_token=ACCESS_TOKEN';    // 修改客户备注信息 POST
+		const EXTERNAL_CONTACT_STRATEGY_LIST     = '/cgi-bin/externalcontact/customer_strategy/list?access_token=ACCESS_TOKEN';    // 获取规则组列表 POST
+		const EXTERNAL_CONTACT_STRATEGY_GET      = '/cgi-bin/externalcontact/customer_strategy/get?access_token=ACCESS_TOKEN';    // 获取规则组详情 POST
+		const EXTERNAL_CONTACT_STRATEGY_GET_RANGE = '/cgi-bin/externalcontact/customer_strategy/get_range?access_token=ACCESS_TOKEN';    // 获取规则组管理范围 POST
+		const EXTERNAL_CONTACT_STRATEGY_CREATE   = '/cgi-bin/externalcontact/customer_strategy/create?access_token=ACCESS_TOKEN';    // 创建新的规则组 POST
+		const EXTERNAL_CONTACT_STRATEGY_EDIT     = '/cgi-bin/externalcontact/customer_strategy/edit?access_token=ACCESS_TOKEN';    // 编辑规则组及其管理范围 POST
+		const EXTERNAL_CONTACT_STRATEGY_DEL      = '/cgi-bin/externalcontact/customer_strategy/del?access_token=ACCESS_TOKEN';    // 删除规则组 POST
 
 		/* 客户标签管理 */
 		const EXTERNAL_CONTACT_GET_CORP_TAG_LIST = '/cgi-bin/externalcontact/get_corp_tag_list?access_token=ACCESS_TOKEN';  // 获取企业标签库 POST
@@ -77,6 +83,10 @@
 		const EXTERNAL_CONTACT_EDIT_CORP_TAG     = '/cgi-bin/externalcontact/edit_corp_tag?access_token=ACCESS_TOKEN';  // 编辑企业客户标签 POST
 		const EXTERNAL_CONTACT_DEL_CORP_TAG      = '/cgi-bin/externalcontact/del_corp_tag?access_token=ACCESS_TOKEN';  // 删除企业客户标签 POST
 		const EXTERNAL_CONTACT_MARK_TAG          = '/cgi-bin/externalcontact/mark_tag?access_token=ACCESS_TOKEN';  // 编辑客户企业标签 POST
+		const EXTERNAL_CONTACT_GET_STRATEGY_TAG_LIST          = '/cgi-bin/externalcontact/get_strategy_tag_list?access_token=ACCESS_TOKEN';  // 获取指定规则组下的企业客户标签 POST
+		const EXTERNAL_CONTACT_ADD_STRATEGY_TAG   = '/cgi-bin/externalcontact/add_strategy_tag?access_token=ACCESS_TOKEN';  // 为指定规则组创建企业客户标签 POST
+		const EXTERNAL_CONTACT_EDIT_STRATEGY_TAG  = '/cgi-bin/externalcontact/edit_strategy_tag?access_token=ACCESS_TOKEN';  // 编辑指定规则组下的企业客户标签 POST
+		const EXTERNAL_CONTACT_DEL_STRATEGY_TAG   = '/cgi-bin/externalcontact/del_strategy_tag?access_token=ACCESS_TOKEN';  // 删除指定规则组下的企业客户标签 POST
 
 		/* 客户群管理 */
 		const EXTERNAL_CONTACT_GROUP_CHAT_LIST = '/cgi-bin/externalcontact/groupchat/list?access_token=ACCESS_TOKEN';    // 获取客户群列表 POST

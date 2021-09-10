@@ -696,6 +696,68 @@
 			return $this->repJson;
 		}
 
+		//获取规则组列表
+		public function ECStrategyList ($limit = 1000, $cursor = '')
+		{
+			$args = [
+				'cursor' => $cursor,
+				'limit'  => $limit,
+			];
+			self::_HttpCall(self::EXTERNAL_CONTACT_STRATEGY_LIST, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		//获取规则组详情
+		public function ECStrategyGet ($strategyId)
+		{
+			$args = [
+				'strategy_id' => $strategyId
+			];
+			self::_HttpCall(self::EXTERNAL_CONTACT_STRATEGY_GET, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		//获取规则组管理范围
+		public function ECStrategyGetRange ($strategyId, $limit = 1000, $cursor = '')
+		{
+			$args = [
+				'strategy_id' => $strategyId,
+				'cursor'      => $cursor,
+				'limit'       => $limit,
+			];
+			self::_HttpCall(self::EXTERNAL_CONTACT_STRATEGY_GET_RANGE, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		//创建新的规则组
+		public function ECStrategyCreate ($args)
+		{
+			self::_HttpCall(self::EXTERNAL_CONTACT_STRATEGY_CREATE, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		//编辑规则组及其管理范围
+		public function ECStrategyEdit ($args)
+		{
+			self::_HttpCall(self::EXTERNAL_CONTACT_STRATEGY_EDIT, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		//删除规则组
+		public function ECStrategyDel ($strategyId)
+		{
+			$args = [
+				'strategy_id' => $strategyId
+			];
+			self::_HttpCall(self::EXTERNAL_CONTACT_STRATEGY_DEL, 'POST', $args);
+
+			return $this->repJson;
+		}
 		// TODO: 还需要优化
 		public function ECGroupChatList ($offset = 0, $limit = 100, $statusFilter = 0, $ownerFilter = [])
 		{
@@ -1313,8 +1375,8 @@
 		 */
 		public function kfServicerDel (string $open_kfid, array $userid_list)
 		{
-			Utils::checkNotEmptyStr($name, 'open_kfid');
-			Utils::checkNotEmptyArray($media_id, 'userid_list');
+			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
+			Utils::checkNotEmptyArray($userid_list, 'userid_list');
 
 			if (count($userid_list) > 100) {
 				$num          = ceil(count($userid_list) / 100);
@@ -1341,7 +1403,7 @@
 				$result = $this->repJson;
 			}
 
-			return $result_list;
+			return $result;
 		}
 
 		/**
