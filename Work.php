@@ -1248,7 +1248,7 @@
 			}
 
 			if (!empty($media_id)) {
-				$args['name'] = $media_id;
+				$args['media_id'] = $media_id;
 			}
 
 			self::_HttpCall(self::WECHAT_KF_ACCOUNT_UPDATE, 'POST', $args);
