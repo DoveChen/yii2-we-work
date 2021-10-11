@@ -1638,7 +1638,7 @@
 			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
 			Utils::checkNotEmptyStr($external_userid, 'external_userid');
 			Utils::checkNotEmptyStr($userid, 'userid');
-			Utils::checkNotEmptyArray($wording, 'wording');
+			Utils::checkNotEmptyStr($wording, 'wording');
 			$args = [
 				'open_kfid'       => $open_kfid,
 				'external_userid' => $external_userid,
@@ -1676,7 +1676,7 @@
 			Utils::checkNotEmptyStr($open_kfid, 'open_kfid');
 			Utils::checkNotEmptyStr($external_userid, 'external_userid');
 			Utils::checkNotEmptyStr($chat_id, 'chat_id');
-			Utils::checkNotEmptyArray($wording, 'wording');
+			Utils::checkNotEmptyStr($wording, 'wording');
 			$args = [
 				'open_kfid'       => $open_kfid,
 				'external_userid' => $external_userid,
