@@ -149,4 +149,13 @@
 
 			return $this->repJson;
 		}
+
+		public function finishExternalUseridMigration ($corpid)
+		{
+			Utils::checkNotEmptyStr($corpid, 'corpid');
+
+			self::_HttpCall(self::FINISH_EXTERNAL_USERID_MIGRATION, 'POST', ['corpid' => $corpid]);
+
+			return $this->repJson;
+		}
 	}

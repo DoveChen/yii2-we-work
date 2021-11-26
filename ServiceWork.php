@@ -257,4 +257,23 @@
 
 			return UserDetailByUserTicket::parseFromArray($this->repJson);
 		}
+
+		public function unionidToExternalUserid3rd ($unionid, $openid, $corpid = '')
+		{
+			Utils::checkNotEmptyStr($unionid, "unionid");
+			Utils::checkNotEmptyStr($openid, "openid");
+
+			$args = [
+				'unionid' => $unionid,
+				'openid'  => $openid,
+			];
+
+			if (!empty($corpid)) {
+				$args['corpid'] = $corpid;
+			}
+
+			self::_HttpCall(self::UNIONID_TO_EXTERNAL_USERID_3RD, 'POST', $args);
+
+			return $this->repJson;
+		}
 	}

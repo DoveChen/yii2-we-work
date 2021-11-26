@@ -758,6 +758,7 @@
 
 			return $this->repJson;
 		}
+
 		// TODO: 还需要优化
 		public function ECGroupChatList ($offset = 0, $limit = 100, $statusFilter = 0, $ownerFilter = [])
 		{
@@ -1717,6 +1718,102 @@
 			];
 
 			self::_HttpCall(self::WECHAT_KF_CUSTOMER_CANCEL_UPGRADE_SERVICE, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 将代开发应用获取的corpid转换为第三方应用获取的corpid
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: toOpenCorpid
+		 *
+		 * @param string $corpid // 代开发自建应用获取到的企业ID
+		 *
+		 * @return null
+		 *
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function toOpenCorpid (string $corpid)
+		{
+			Utils::checkNotEmptyStr($corpid, 'corpid');
+
+			self::_HttpCall(self::TO_OPEN_CORPID, 'POST', ['corpid' => $corpid]);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 将代开发应用获取的userid转换为第三方应用获取的userid
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: useridToOpenuserid
+		 *
+		 * @param array $useridList // 代开发自建应用获取到的成员ID
+		 *
+		 * @return null
+		 *
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function useridToOpenuserid (array $useridList)
+		{
+			Utils::checkNotEmptyArray($useridList, 'userid_list');
+
+			self::_HttpCall(self::USERID_TO_OPENUSERID, 'POST', ['userid_list' => $useridList]);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 将代开发自建应用获取到的external_userid转换为服务商第三方应用的external_userid。
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: useridToOpenuserid
+		 *
+		 * @param string $externalUserid // 代开发自建应用获取到的外部联系人ID
+		 *
+		 * @return null
+		 *
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function toServiceExternalUserid (string $externalUserid)
+		{
+			Utils::checkNotEmptyStr($externalUserid, 'external_userid');
+
+			self::_HttpCall(self::TO_SERVICE_EXTERNAL_USERID, 'POST', ['external_userid' => $externalUserid]);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 批量转换external_userid
+		 * File: vendor/dovechen/yii2-we-work/Work.php
+		 * Class: Work
+		 * Function: getNewExternalUserid
+		 *
+		 * @param array $externalUseridList // 旧外部联系人id列表，最多不超过1000个
+		 *
+		 * @return null
+		 *
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function getNewExternalUserid (array $externalUseridList)
+		{
+			Utils::checkNotEmptyArray($externalUseridList, '$externalUseridList');
+
+			self::_HttpCall(self::GET_NEW_EXTERNAL_USERID, 'POST', ['external_userid_list' => $externalUseridList]);
 
 			return $this->repJson;
 		}
