@@ -107,6 +107,10 @@
 		const EXTERNAL_CONTACT_GROUP_CHAT_TRANSFER = '/cgi-bin/externalcontact/groupchat/transfer?access_token=ACCESS_TOKEN';  // 离职成员的群再分配 POST
 		const EXTERNAL_CONTACT_GET_TRANSFER_RESULT = '/cgi-bin/externalcontact/get_transfer_result?access_token=ACCESS_TOKEN';  // 查询客户接替结果 POST
 
+		/* 离职管理新接口 (老接口企微官方已不再维护) */
+		const EXTERNAL_CONTACT_TRANSFER_CUSTOMER = '/cgi-bin/externalcontact/resigned/transfer_customer?access_token=ACCESS_TOKEN';  // 分配离职成员的客户: 企业可通过此接口，分配离职成员的客户给其他成员。 POST
+		const EXTERNAL_CONTACT_TRANSFER_RESULT   = '/cgi-bin/externalcontact/resigned/transfer_result?access_token=ACCESS_TOKEN';  // 查询客户接替状态: 企业和第三方可通过此接口查询离职成员的客户分配情况。 POST
+
 		/* 统计管理 */
 		const EXTERNAL_CONTACT_GET_USER_BEHAVIOR_DATA = '/cgi-bin/externalcontact/get_user_behavior_data?access_token=ACCESS_TOKEN'; // 获取联系客户统计数据 POST
 		const EXTERNAL_CONTACT_GROUP_CHAT_STATISTIC   = '/cgi-bin/externalcontact/groupchat/statistic?access_token=ACCESS_TOKEN'; // 获取客户群统计数据 POST

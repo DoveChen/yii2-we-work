@@ -813,7 +813,13 @@
 		public function ECGroupWelcomeTemplateAdd (ExternalContactMsgTemplate $msgTemplate)
 		{
 			ExternalContactMsgTemplate::checkGroupWelcomeTemplateAddArgs($msgTemplate);
+			if (isset($msgTemplate->notify)) {
+				$notify = $msgTemplate->notify;
+			}
 			$args = Utils::Object2Array($msgTemplate);
+			if (isset($notify)) {
+				$args['notify'] = $notify;
+			}
 			self::_HttpCall(self::EXTERNAL_CONTACT_GROUP_WELCOME_TEMPLATE_ADD, "POST", $args);
 
 			return $this->repJson;
@@ -851,6 +857,13 @@
 			return ExternalContactUnAssignUser::arrayToUnAssignUserInfo($this->repJson);
 		}
 
+		public function ECGetUnAssignedListPage ($pageId = 0, $pageSize = 1000)
+		{
+			self::_HttpCall(self::EXTERNAL_CONTACT_GET_UNASSIGNED_LIST, 'POST', ['page_id' => $pageId, 'page_size' => $pageSize]);
+
+			return $this->repJson;
+		}
+
 		public function ECTransfer ($externalUserId, $handoverUserId, $takeoverUserId)
 		{
 			Utils::checkNotEmptyStr($externalUserId, 'external_userid');
@@ -863,6 +876,35 @@
 				'takeover_userid' => $takeoverUserId,
 			];
 			self::_HttpCall(self::EXTERNAL_CONTACT_TRANSFER, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 分配离职成员的客户
+		 *
+		 * @param       $handoverUserId
+		 * @param       $takeoverUserId
+		 * @param array $externalUserId
+		 *
+		 * @return |null
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function ECTransferCustomer ($handoverUserId, $takeoverUserId, array $externalUserId)
+		{
+			Utils::checkNotEmptyStr($handoverUserId, 'handover_userid');
+			Utils::checkNotEmptyStr($takeoverUserId, 'takeover_userid');
+			Utils::notEmptyArray($externalUserId, 'external_userid');
+
+			$args = [
+				'handover_userid' => $handoverUserId,
+				'takeover_userid' => $takeoverUserId,
+				'external_userid' => $externalUserId,
+			];
+			self::_HttpCall(self::EXTERNAL_CONTACT_TRANSFER_CUSTOMER, 'POST', $args);
 
 			return $this->repJson;
 		}
