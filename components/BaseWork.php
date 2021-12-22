@@ -95,6 +95,8 @@
 		/* 消息推送 */
 		const EXTERNAL_CONTACT_ADD_MSG_TEMPLATE            = '/cgi-bin/externalcontact/add_msg_template?access_token=ACCESS_TOKEN';    // 添加企业群发消息任务 POST
 		const EXTERNAL_CONTACT_GET_GROUP_MSG_RESULT        = '/cgi-bin/externalcontact/get_group_msg_result?access_token=ACCESS_TOKEN';    // 获取企业群发消息发送结果 POST
+		const EXTERNAL_CONTACT_GET_GROUP_MSG_TASK          = '/cgi-bin/externalcontact/get_groupmsg_task?access_token=ACCESS_TOKEN';    // 获取群发成员发送任务列表 POST
+		const EXTERNAL_CONTACT_GET_GROUPMSG_SEND_RESULT    = '/cgi-bin/externalcontact/get_groupmsg_send_result?access_token=ACCESS_TOKEN';    // 获取群发成员发送任务列表 POST
 		const EXTERNAL_CONTACT_SEND_WELCOME_MSG            = '/cgi-bin/externalcontact/send_welcome_msg?access_token=ACCESS_TOKEN';    // 发送新客户欢迎语 POST
 		const EXTERNAL_CONTACT_GROUP_WELCOME_TEMPLATE_ADD  = '/cgi-bin/externalcontact/group_welcome_template/add?access_token=ACCESS_TOKEN';    // 添加群欢迎语素材 POST
 		const EXTERNAL_CONTACT_GROUP_WELCOME_TEMPLATE_EDIT = '/cgi-bin/externalcontact/group_welcome_template/edit?access_token=ACCESS_TOKEN';    // 编辑群欢迎语素材 POST

@@ -801,6 +801,23 @@
 			return $this->repJson;
 		}
 
+		public function ECGetGroupMsgTask ($sendData)
+		{
+			Utils::checkNotEmptyStr($sendData['msgid'] ?? '', 'msgid');
+			self::_HttpCall(self::EXTERNAL_CONTACT_GET_GROUP_MSG_TASK, 'POST', $sendData);
+
+			return $this->repJson;
+		}
+
+		public function ECGetGroupmsgSendResult ($sendData)
+		{
+			Utils::checkNotEmptyStr($sendData['msgid'] ?? '', 'msgid');
+			Utils::checkNotEmptyStr($sendData['userid'] ?? '', 'userid');
+			self::_HttpCall(self::EXTERNAL_CONTACT_GET_GROUPMSG_SEND_RESULT, 'POST', $sendData);
+
+			return $this->repJson;
+		}
+
 		public function ECSendWelcomeMsg (ExternalContactMsgTemplate $msgTemplate)
 		{
 			ExternalContactMsgTemplate::checkMsgTemplateSendArgs($msgTemplate);
@@ -923,6 +940,14 @@
 		{
 			$args = Utils::Object2Array($handoverData);
 			self::_HttpCall(self::EXTERNAL_CONTACT_GET_TRANSFER_RESULT, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		public function EContactResignedTransferResult ($handoverData)
+		{
+			$args = Utils::Object2Array($handoverData);
+			self::_HttpCall(self::EXTERNAL_CONTACT_TRANSFER_RESULT, 'POST', $args);
 
 			return $this->repJson;
 		}
