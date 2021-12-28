@@ -776,6 +776,22 @@
 			return $this->repJson;
 		}
 
+		public function ECGroupChatStaticTime ($s_time, $e_time, $ownerIds)
+		{
+			$args = [
+				'day_begin_time' => $s_time,
+				'day_end_time'   => $e_time,
+				'owner_filter'   => [
+					"userid_list" => $ownerIds
+				],
+			];
+			Utils::checkNotEmptyArray($ownerIds, 'userid_list');
+
+			self::_HttpCall(self::EXTERNAL_CONTACT_GROUP_CHAT_STATIC_GET, 'POST', $args);
+
+			return $this->repJson;
+		}
+
 		public function ECGroupChatGet ($chatId)
 		{
 			Utils::checkNotEmptyStr($chatId, 'chat_id');

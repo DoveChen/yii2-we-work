@@ -91,6 +91,8 @@
 		/* 客户群管理 */
 		const EXTERNAL_CONTACT_GROUP_CHAT_LIST = '/cgi-bin/externalcontact/groupchat/list?access_token=ACCESS_TOKEN';    // 获取客户群列表 POST
 		const EXTERNAL_CONTACT_GROUP_CHAT_GET  = '/cgi-bin/externalcontact/groupchat/get?access_token=ACCESS_TOKEN';    // 获取客户群详情 POST
+		/**按自然日聚合的方式 群聊数据统计**/
+		const EXTERNAL_CONTACT_GROUP_CHAT_STATIC_GET = '/cgi-bin/externalcontact/groupchat/statistic_group_by_day?access_token=ACCESS_TOKEN';    // 获取客户群详情 POST
 
 		/* 消息推送 */
 		const EXTERNAL_CONTACT_ADD_MSG_TEMPLATE            = '/cgi-bin/externalcontact/add_msg_template?access_token=ACCESS_TOKEN';    // 添加企业群发消息任务 POST
