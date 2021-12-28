@@ -4,6 +4,8 @@ Yii2 wechat work SDK
 
 [![Latest Stable Version](https://poser.pugx.org/dovechen/yii2-we-work/v/stable.png)](https://packagist.org/packages/dovechen/yii2-we-work)
 [![Total Downloads](https://poser.pugx.org/dovechen/yii2-we-work/downloads.png)](https://packagist.org/packages/dovechen/yii2-we-work)
+[![License](http://poser.pugx.org/dovechen/yii2-we-work/license)](https://packagist.org/packages/dovechen/yii2-we-work)
+[![PHP Version Require](http://poser.pugx.org/dovechen/yii2-we-work/require/php)](https://packagist.org/packages/dovechen/yii2-we-work)
 
 Installation
 ------------
