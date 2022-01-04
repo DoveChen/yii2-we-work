@@ -115,6 +115,9 @@
 		const EXTERNAL_CONTACT_TRANSFER_CUSTOMER = '/cgi-bin/externalcontact/resigned/transfer_customer?access_token=ACCESS_TOKEN';  // 分配离职成员的客户: 企业可通过此接口，分配离职成员的客户给其他成员。 POST
 		const EXTERNAL_CONTACT_TRANSFER_RESULT   = '/cgi-bin/externalcontact/resigned/transfer_result?access_token=ACCESS_TOKEN';  // 查询客户接替状态: 企业和第三方可通过此接口查询离职成员的客户分配情况。 POST
 
+		/* 在职继承  查询客户接替状态*/
+		const EXTERNALCONTACT_TRANSFER_RESULT = '/cgi-bin/externalcontact/transfer_result?access_token=ACCESS_TOKEN';  // 企业和第三方可通过此接口查询在职成员的客户转接情况。 POST
+
 		/* 统计管理 */
 		const EXTERNAL_CONTACT_GET_USER_BEHAVIOR_DATA = '/cgi-bin/externalcontact/get_user_behavior_data?access_token=ACCESS_TOKEN'; // 获取联系客户统计数据 POST
 		const EXTERNAL_CONTACT_GROUP_CHAT_STATISTIC   = '/cgi-bin/externalcontact/groupchat/statistic?access_token=ACCESS_TOKEN'; // 获取客户群统计数据 POST

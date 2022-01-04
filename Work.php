@@ -968,6 +968,14 @@
 			return $this->repJson;
 		}
 
+		public function EContactTransferResult ($handoverData)
+		{
+			$args = Utils::Object2Array($handoverData);
+			self::_HttpCall(self::EXTERNALCONTACT_TRANSFER_RESULT, 'POST', $args);
+
+			return $this->repJson;
+		}
+
 		public function ECGetUserBeheviorData ($behavior)
 		{
 			ExternalContactBehavior::checkBehaviorGetArgs($behavior);
