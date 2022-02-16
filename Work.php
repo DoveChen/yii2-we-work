@@ -890,9 +890,15 @@
 			return ExternalContactUnAssignUser::arrayToUnAssignUserInfo($this->repJson);
 		}
 
-		public function ECGetUnAssignedListPage ($pageId = 0, $pageSize = 1000)
+		public function ECGetUnAssignedListPage ($pageId = 0, $pageSize = 1000, $cursor = '')
 		{
-			self::_HttpCall(self::EXTERNAL_CONTACT_GET_UNASSIGNED_LIST, 'POST', ['page_id' => $pageId, 'page_size' => $pageSize]);
+			$params['page_size'] = $pageSize;
+			if (!empty($cursor)) {
+				mb_strlen($cursor) > 1 && $params['cursor'] = $cursor;
+			} else {
+				$params['page_id'] = $pageId;
+			}
+			self::_HttpCall(self::EXTERNAL_CONTACT_GET_UNASSIGNED_LIST, 'POST', $params);
 
 			return $this->repJson;
 		}
