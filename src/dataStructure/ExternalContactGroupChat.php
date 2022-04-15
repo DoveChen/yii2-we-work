@@ -13,6 +13,7 @@
 	 * @property string $create_time    群的创建时间
 	 * @property string $notice         群公告
 	 * @property array  $member_list    群成员列表
+	 * @property array  $admin_list     群管理员列表
 	 *
 	 * @package dovechen\yii2\weWork\src\dataStructure
 	 */
@@ -32,11 +33,19 @@
 			$groupChat->owner       = Utils::arrayGet($arr, 'owner');
 			$groupChat->create_time = Utils::arrayGet($arr, 'create_time');
 			$groupChat->notice      = Utils::arrayGet($arr, 'notice');
+
+			$groupChat->member_list = [];
 			$memberList             = Utils::arrayGet($arr, 'member_list');
 			if (is_array($memberList)) {
-				$groupChat->member_list = [];
 				foreach ($memberList as $item) {
 					array_push($groupChat->member_list, ExternalContactGroupChatMemberList::parseFromArray($item));
+				}
+			}
+			$groupChat->admin_list = [];
+			$adminList             = Utils::arrayGet($arr, 'admin_list');
+			if (is_array($adminList)) {
+				foreach ($adminList as $item) {
+					array_push($groupChat->admin_list, ExternalContactGroupChatAdminList::parseFromArray($item));
 				}
 			}
 

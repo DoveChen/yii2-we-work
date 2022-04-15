@@ -792,10 +792,10 @@
 			return $this->repJson;
 		}
 
-		public function ECGroupChatGet ($chatId)
+		public function ECGroupChatGet ($chatId, $needName = 0)
 		{
 			Utils::checkNotEmptyStr($chatId, 'chat_id');
-			self::_HttpCall(self::EXTERNAL_CONTACT_GROUP_CHAT_GET, 'POST', ['chat_id' => $chatId]);
+			self::_HttpCall(self::EXTERNAL_CONTACT_GROUP_CHAT_GET, 'POST', ['chat_id' => $chatId, 'need_name' => $needName]);
 
 			return ExternalContactGroupChat::parseFromArray(Utils::arrayGet($this->repJson, 'group_chat'));
 		}
