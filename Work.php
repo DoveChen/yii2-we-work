@@ -903,6 +903,27 @@
 			return $this->repJson;
 		}
 
+		public function ECAddJoinWay ($params)
+		{
+			self::_HttpCall(self::ADD_JOIN_WAY, 'POST', $params);
+
+			return $this->repJson;
+		}
+
+		public function ECGetJoinWay ($params)
+		{
+			self::_HttpCall(self::GET_JOIN_WAY, 'POST', $params);
+
+			return $this->repJson;
+		}
+
+		public function ECUpdateJoinWay ($params)
+		{
+			self::_HttpCall(self::UPDATE_JOIN_WAY, 'POST', $params);
+
+			return $this->repJson;
+		}
+
 		public function ECTransfer ($externalUserId, $handoverUserId, $takeoverUserId)
 		{
 			Utils::checkNotEmptyStr($externalUserId, 'external_userid');
