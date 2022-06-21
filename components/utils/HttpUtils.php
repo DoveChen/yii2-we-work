@@ -29,6 +29,9 @@
 		public static function Array2Json ($arr)
 		{
 			if(empty($arr)){
+				if (is_array($arr)) {
+					return '[]';
+				}
 				return '{}';
 			}
 			$parts      = [];
