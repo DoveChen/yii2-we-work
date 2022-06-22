@@ -26,7 +26,7 @@
 		const TYPE_MORE = 2;
 
 		const MINIPROGRAM_SCENE = 1;
-		const QRCODE_SCENE = 2;
+		const QRCODE_SCENE      = 2;
 
 		/**
 		 * @param $arr
@@ -38,14 +38,14 @@
 			$externalContactWay = new ExternalContactWay();
 
 			$externalContactWay->config_id   = Utils::arrayGet($arr, 'config_id');
-			$externalContactWay->type        = Utils::arrayGet($arr, 'type');
-			$externalContactWay->scene       = Utils::arrayGet($arr, 'scene');
-			$externalContactWay->style       = Utils::arrayGet($arr, 'style');
+			$externalContactWay->type        = Utils::arrayGet($arr, 'type', self::TYPE_ONLY);
+			$externalContactWay->scene       = Utils::arrayGet($arr, 'scene', self::QRCODE_SCENE);
+			$externalContactWay->style       = Utils::arrayGet($arr, 'style', 1);
 			$externalContactWay->remark      = Utils::arrayGet($arr, 'remark');
-			$externalContactWay->skip_verify = Utils::arrayGet($arr, 'skip_verify');
+			$externalContactWay->skip_verify = Utils::arrayGet($arr, 'skip_verify', true);
 			$externalContactWay->state       = Utils::arrayGet($arr, 'state');
-			$externalContactWay->user        = Utils::arrayGet($arr, 'user');
-			$externalContactWay->party       = Utils::arrayGet($arr, 'party');
+			$externalContactWay->user        = Utils::arrayGet($arr, 'user', []);
+			$externalContactWay->party       = Utils::arrayGet($arr, 'party', []);
 			$externalContactWay->qr_code     = Utils::arrayGet($arr, 'qr_code');
 
 			return $externalContactWay;
