@@ -24,6 +24,7 @@
 	use dovechen\yii2\weWork\src\dataStructure\MsgAuditCheckAgree;
 	use dovechen\yii2\weWork\src\dataStructure\Tag;
 	use dovechen\yii2\weWork\src\dataStructure\User;
+	use dovechen\yii2\weWork\src\dataStructure\UserDetailByUserTicket;
 	use dovechen\yii2\weWork\src\dataStructure\UserInfoByCode;
 	use dovechen\yii2\weWork\components\HttpUtils;
 	use dovechen\yii2\weWork\components\Utils;
@@ -1025,6 +1026,14 @@
 			self::_HttpCall(self::USR_GET_USER_INFO, 'GET', ['code' => $code]);
 
 			return UserInfoByCode::parseFromArray($this->repJson);
+		}
+
+		public function GetUserDetail ($userTicket)
+		{
+			Utils::checkNotEmptyStr($userTicket, "user_ticket");
+			self::_HttpCall(self::USER_GET_USER_DETAIL, 'POST', ['user_ticket' => $userTicket]);
+
+			return UserDetailByUserTicket::parseFromArray($this->repJson);
 		}
 
 		/* 素材管理 */

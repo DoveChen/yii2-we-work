@@ -19,8 +19,8 @@
 
 		const GET_API_DOMAIN_IP = '/cgi-bin/get_api_domain_ip?access_token=ACCESS_TOKEN';   // 获取企业微信API域名IP段 GET
 
-		const ADD_JOIN_WAY = '/cgi-bin/externalcontact/groupchat/add_join_way?access_token=ACCESS_TOKEN'; //配置客户群进群方式 POST
-		const GET_JOIN_WAY = '/cgi-bin/externalcontact/groupchat/get_join_way?access_token=ACCESS_TOKEN'; //获取客户群进群方式配置 POST
+		const ADD_JOIN_WAY    = '/cgi-bin/externalcontact/groupchat/add_join_way?access_token=ACCESS_TOKEN'; //配置客户群进群方式 POST
+		const GET_JOIN_WAY    = '/cgi-bin/externalcontact/groupchat/get_join_way?access_token=ACCESS_TOKEN'; //获取客户群进群方式配置 POST
 		const UPDATE_JOIN_WAY = '/cgi-bin/externalcontact/groupchat/update_join_way?access_token=ACCESS_TOKEN'; //更新客户群进群方式 POST
 
 		/* 通讯录管理 */
@@ -128,7 +128,8 @@
 
 		/* 身份验证 */
 		/* 网页授权登录 */
-		const USR_GET_USER_INFO = '/cgi-bin/user/getuserinfo?access_token=ACCESS_TOKEN';    // 获取访问用户身份 GET
+		const USR_GET_USER_INFO    = '/cgi-bin/user/getuserinfo?access_token=ACCESS_TOKEN';    // 获取访问用户身份 GET
+		const USER_GET_USER_DETAIL = '/cgi-bin/user/getuserdetail?access_token=ACCESS_TOKEN';    // 获取访问用户敏感信息 POST
 
 		/* 应用管理 */
 		/* 获取应用 */
