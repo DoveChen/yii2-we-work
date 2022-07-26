@@ -148,6 +148,12 @@
 		/* 发送应用消息 */
 		const MESSAGE_SEND = '/cgi-bin/message/send?access_token=ACCESS_TOKEN'; // 发送应用消息 POST
 
+		/* 企业发表内容到客户的朋友圈 */
+		const MESSAGE_SEND_MOMENT_TASK = '/cgi-bin/externalcontact/add_moment_task?access_token=ACCESS_TOKEN'; // 发送应用消息 POST
+
+		/* 上传附件 */
+		const MESSAGE_SEND_UPLOAD_ATTACMENT = '/cgi-bin/media/upload_attachment?access_token=ACCESS_TOKEN'; // 发送应用消息 POST
+
 		/* 更新任务卡片消息状态 */
 		const MESSAGE_UPDATE_TASKCARD = '/cgi-bin/message/update_taskcard?access_token=ACCESS_TOKEN';   // 更新任务卡片消息状态 POST
 
@@ -330,6 +336,7 @@
 		const GET_MOMENT_CUSTOMER_LIST = '/cgi-bin/externalcontact/get_moment_customer_list?access_token=ACCESS_TOKEN'; // 获取客户朋友圈发表时选择的可见范围
 		const GET_MOMENT_SEND_RESULT   = '/cgi-bin/externalcontact/get_moment_send_result?access_token=ACCESS_TOKEN'; // 获取客户朋友圈发表后的可见客户列表
 		const GET_MOMENT_COMMENTS      = '/cgi-bin/externalcontact/get_moment_comments?access_token=ACCESS_TOKEN'; // 获取客户朋友圈的互动数据
+		const GET_MOMENT_TASK_RESULT   = '/cgi-bin/externalcontact/get_moment_task_result?access_token=ACCESS_TOKEN'; // 企业发表朋友圈  获取任务创建结果   jobid换moment_id
 
 		/* 微信客服 */
 		const WECHAT_KF_ACCOUNT_ADD                         = '/cgi-bin/kf/account/add?access_token=ACCESS_TOKEN'; // 添加客服帐号
@@ -358,6 +365,13 @@
 		const GET_NEW_EXTERNAL_USERID          = '/cgi-bin/externalcontact/get_new_external_userid?access_token=ACCESS_TOKEN';   // 转换external_userid
 		const FINISH_EXTERNAL_USERID_MIGRATION = '/cgi-bin/service/externalcontact/finish_external_userid_migration?provider_access_token=PROVIDER_ACCESS_TOKEN';   // 设置迁移完成
 		const UNIONID_TO_EXTERNAL_USERID_3RD   = '/cgi-bin/service/externalcontact/unionid_to_external_userid_3rd?suite_access_token=SUITE_ACCESS_TOKEN';   // unionid查询external_userid
+
+		/* 明文corpid转换为加密corpid */
+		const CORPID_TO_OPENCORPID = '/cgi-bin/service/corpid_to_opencorpid?provider_access_token=PROVIDER_ACCESS_TOKEN';   // 明文corpid转换为加密corpid
+
+		/* 自建应用与第三方应用的对接 */
+		const OPENUSERID_TO_USERID         = '/cgi-bin/batch/openuserid_to_userid?access_token=ACCESS_TOKEN';   // userid转换
+		const FROM_SERVICE_EXTERNAL_USERID = '/cgi-bin/externalcontact/from_service_external_userid?access_token=ACCESS_TOKEN';   // external_userid转换
 
 		protected function GetAccessToken ($force = false)
 		{

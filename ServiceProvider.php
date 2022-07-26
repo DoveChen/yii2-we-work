@@ -158,4 +158,13 @@
 
 			return $this->repJson;
 		}
+
+		public function corpidToOpencorpid ($corpid)
+		{
+			Utils::checkNotEmptyStr($corpid, 'corpid');
+
+			self::_HttpCall(self::CORPID_TO_OPENCORPID, 'POST', ['corpid' => $corpid]);
+
+			return $this->repJson;
+		}
 	}

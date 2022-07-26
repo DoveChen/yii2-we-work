@@ -1058,6 +1058,29 @@
 			return $this->repJson["media_id"];
 		}
 
+		/* 附件管理 */
+		public function Enclosure ($filePath, $type, $plus = [])
+		{
+			Utils::checkNotEmptyStr($filePath, "filePath");
+			Utils::checkNotEmptyStr($type, "type");
+			if (!file_exists($filePath)) {
+				throw new \QyApiError("file not exists");
+			}
+			$fileName = !empty($plus['file_name']) ? $plus['file_name'] : basename($filePath);
+			// 兼容php5.3-5.6 curl模块的上传操作
+			$args = [];
+			if (class_exists('\CURLFile')) {
+				$args = ['media' => new \CURLFile(realpath($filePath), 'application/octet-stream', $fileName)];
+			} else {
+				$args = ['media' => '@' . realpath($filePath)];
+			}
+
+			//self::_HttpCall(self::MEDIA_UPLOAD . '&type=' . $type, 'POST', $args, true, true);
+			self::_HttpCall(self::MESSAGE_SEND_UPLOAD_ATTACMENT . '&media_type=' . $type . '&attachment_type=' . 1, 'POST', $args, true, true);
+
+			return $this->repJson["media_id"];
+		}
+
 		public function MediaUploadByBuffer ($buffer, $type)
 		{
 			$tmpPath = self::WriteTmpFile($buffer);
@@ -1110,6 +1133,29 @@
 			self::_HttpCall(self::MESSAGE_SEND, 'POST', $args);
 
 			$this->getInvalidList($invalidUserIdList, $invalidPartyIdList, $invalidTagIdList);
+
+			return $this->repJson;
+		}
+
+		/* 朋友圈群發 */
+		/**
+		 * @throws \QyApiError
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 */
+		public function MessageSendMomentTask ($message)
+		{
+			self::_HttpCall(self::MESSAGE_SEND_MOMENT_TASK, 'POST', $message);
+
+			return $this->repJson;
+		}
+
+		/*
+		 * 上传附件1
+		 * */
+		public function MessageSendUploadMoment ($type, $media)
+		{
+			self::_HttpCall(self::MESSAGE_SEND_UPLOAD_ATTACMENT . '&type=' . $type . '&attachment_type=' . 1, 'POST', $media);
 
 			return $this->repJson;
 		}
@@ -1945,4 +1991,59 @@
 			return $this->repJson;
 		}
 
+		/**
+		 * 换取momet_id
+		 * */
+		public function getMomentId ($job_id)
+		{
+			self::_HttpCall(self::GET_MOMENT_TASK_RESULT . '&jobid=' . $job_id);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * userid转换
+		 * 将代开发应用或第三方应用获取的密文open_userid转换为明文userid。
+		 *
+		 * @param $openUseridList
+		 * @param $sourceAgentid
+		 *
+		 * @return null
+		 *
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function openuseridToUserid ($openUseridList, $sourceAgentid)
+		{
+			Utils::checkNotEmptyArray($openUseridList, 'open_userid_list');
+			Utils::checkNotEmptyStr($sourceAgentid, 'source_agentid');
+			self::_HttpCall(self::OPENUSERID_TO_USERID, 'POST', ['open_userid_list' => $openUseridList, 'source_agentid' => $sourceAgentid]);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * external_userid转换
+		 * 将代开发应用或第三方应用获取的externaluserid转换成自建应用的externaluserid。
+		 *
+		 * @param $externalUserid
+		 * @param $sourceAgentid
+		 *
+		 * @return null
+		 *
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function fromServiceExternalUserid ($externalUserid, $sourceAgentid)
+		{
+			Utils::checkNotEmptyStr($externalUserid, 'external_userid');
+			Utils::checkNotEmptyStr($sourceAgentid, 'source_agentid');
+			self::_HttpCall(self::FROM_SERVICE_EXTERNAL_USERID, 'POST', ['external_userid' => $externalUserid, 'source_agentid' => $sourceAgentid]);
+
+			return $this->repJson;
+		}
 	}
