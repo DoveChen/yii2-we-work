@@ -2018,7 +2018,6 @@
 		public function openuseridToUserid ($openUseridList, $sourceAgentid)
 		{
 			Utils::checkNotEmptyArray($openUseridList, 'open_userid_list');
-			Utils::checkNotEmptyStr($sourceAgentid, 'source_agentid');
 			self::_HttpCall(self::OPENUSERID_TO_USERID, 'POST', ['open_userid_list' => $openUseridList, 'source_agentid' => $sourceAgentid]);
 
 			return $this->repJson;
@@ -2041,7 +2040,6 @@
 		public function fromServiceExternalUserid ($externalUserid, $sourceAgentid)
 		{
 			Utils::checkNotEmptyStr($externalUserid, 'external_userid');
-			Utils::checkNotEmptyStr($sourceAgentid, 'source_agentid');
 			self::_HttpCall(self::FROM_SERVICE_EXTERNAL_USERID, 'POST', ['external_userid' => $externalUserid, 'source_agentid' => $sourceAgentid]);
 
 			return $this->repJson;
