@@ -320,8 +320,9 @@
 		const SERVICE_FETCH_DEVICE_LOG     = '/cgi-bin/service/fetch_device_log?provider_access_token=PROVIDER_ACCESS_TOKEN';   // 上传设备日志 POST
 
 		// js-sdk
-		const GET_JSAPI_TICKET = '/cgi-bin/get_jsapi_ticket?access_token=ACCESS_TOKEN';   // 获取企业的jsapi_ticket
-		const TICKET_GET       = '/cgi-bin/ticket/get?access_token=ACCESS_TOKEN';   // 获取应用的jsapi_ticket
+		const GET_JSAPI_TICKET       = '/cgi-bin/get_jsapi_ticket?access_token=ACCESS_TOKEN';   // 获取企业的jsapi_ticket
+		const GET_SUITE_JSAPI_TICKET = '/cgi-bin/get_jsapi_ticket?suite_access_token=SUITE_ACCESS_TOKEN';   // 获取服务上下企业的jsapi_ticket
+		const TICKET_GET             = '/cgi-bin/ticket/get?access_token=ACCESS_TOKEN';   // 获取应用的jsapi_ticket
 
 		/* 会话存档内容 */
 		const GET_PERMIT_USER_LIST = '/cgi-bin/msgaudit/get_permit_user_list?access_token=ACCESS_TOKEN'; // 获取会话内容存档开启成员列表

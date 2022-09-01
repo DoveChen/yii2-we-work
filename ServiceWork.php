@@ -276,4 +276,11 @@
 
 			return $this->repJson;
 		}
+
+		public function GetSuiteJsapiTicket ()
+		{
+			self::_HttpCall(self::GET_SUITE_JSAPI_TICKET);
+
+			return $this->repJson;
+		}
 	}
