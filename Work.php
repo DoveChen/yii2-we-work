@@ -904,6 +904,34 @@
 			return $this->repJson;
 		}
 
+		public function ECCalendarAdd ($params)
+		{
+			self::_HttpCall(self::CALENDAR_ADD, 'POST', $params);
+
+			return $this->repJson;
+		}
+
+		public function ECCalendarGet ($params)
+		{
+			self::_HttpCall(self::CALENDAR_GET, 'POST', $params);
+
+			return $this->repJson;
+		}
+
+		public function ECScheduleAdd ($params)
+		{
+			self::_HttpCall(self::OA_SCHEDULE_ADD, 'POST', $params);
+
+			return $this->repJson;
+		}
+
+		public function ECScheduleGet ($params)
+		{
+			self::_HttpCall(self::OA_SCHEDULE_GET, 'POST', $params);
+
+			return $this->repJson;
+		}
+
 		public function ECAddJoinWay ($params)
 		{
 			self::_HttpCall(self::ADD_JOIN_WAY, 'POST', $params);

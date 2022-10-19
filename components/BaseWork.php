@@ -23,6 +23,9 @@
 		const GET_JOIN_WAY    = '/cgi-bin/externalcontact/groupchat/get_join_way?access_token=ACCESS_TOKEN'; //获取客户群进群方式配置 POST
 		const UPDATE_JOIN_WAY = '/cgi-bin/externalcontact/groupchat/update_join_way?access_token=ACCESS_TOKEN'; //更新客户群进群方式 POST
 
+		const CALENDAR_ADD = '/cgi-bin/oa/calendar/add?access_token=ACCESS_TOKEN'; //创建日历 POST
+		const CALENDAR_GET = '/cgi-bin/oa/calendar/get?access_token=ACCESS_TOKEN'; //获取日历 POST
+
 		/* 通讯录管理 */
 		/* 成员管理 */
 		const USER_CREATE            = '/cgi-bin/user/create?access_token=ACCESS_TOKEN';   // 创建成员 POST
@@ -340,22 +343,33 @@
 		const GET_MOMENT_TASK_RESULT   = '/cgi-bin/externalcontact/get_moment_task_result?access_token=ACCESS_TOKEN'; // 企业发表朋友圈  获取任务创建结果   jobid换moment_id
 
 		/* 微信客服 */
-		const WECHAT_KF_ACCOUNT_ADD                         = '/cgi-bin/kf/account/add?access_token=ACCESS_TOKEN'; // 添加客服帐号
-		const WECHAT_KF_ACCOUNT_DEL                         = '/cgi-bin/kf/account/del?access_token=ACCESS_TOKEN';//删除客服帐号
-		const WECHAT_KF_ACCOUNT_UPDATE                      = '/cgi-bin/kf/account/update?access_token=ACCESS_TOKEN';//修改客服账号
-		const WECHAT_KF_ACCOUNT_LIST                        = '/cgi-bin/kf/account/list?access_token=ACCESS_TOKEN';//获取客服账号列表
-		const WECHAT_KF_ADD_CONTACT_WAY                     = '/cgi-bin/kf/add_contact_way?access_token=ACCESS_TOKEN';//获取客服帐号链接
-		const WECHAT_KF_SERVICER_ADD                        = '/cgi-bin/kf/servicer/add?access_token=ACCESS_TOKEN';//添加接待人员
-		const WECHAT_KF_SERVICER_DEL                        = '/cgi-bin/kf/servicer/del?access_token=ACCESS_TOKEN';//删除接待人员
-		const WECHAT_KF_SERVICER_LIST                       = '/cgi-bin/kf/servicer/list?access_token=ACCESS_TOKEN';//获取接待人员列表
-		const WECHAT_KF_SERVICER_STATE_GET                  = '/cgi-bin/kf/service_state/get?access_token=ACCESS_TOKEN';//获取会话状态
-		const WECHAT_KF_SERVICER_STATE_TRANS                = '/cgi-bin/kf/service_state/trans?access_token=ACCESS_TOKEN';//变更会话状态
+		/* 客服帐号管理 */
+		const WECHAT_KF_ACCOUNT_ADD     = '/cgi-bin/kf/account/add?access_token=ACCESS_TOKEN'; // 添加客服帐号
+		const WECHAT_KF_ACCOUNT_DEL     = '/cgi-bin/kf/account/del?access_token=ACCESS_TOKEN';//删除客服帐号
+		const WECHAT_KF_ACCOUNT_UPDATE  = '/cgi-bin/kf/account/update?access_token=ACCESS_TOKEN';//修改客服账号
+		const WECHAT_KF_ACCOUNT_LIST    = '/cgi-bin/kf/account/list?access_token=ACCESS_TOKEN';//获取客服账号列表
+		const WECHAT_KF_ADD_CONTACT_WAY = '/cgi-bin/kf/add_contact_way?access_token=ACCESS_TOKEN';//获取客服帐号链接
+		/* 接待人员管理 */
+		const WECHAT_KF_SERVICER_ADD  = '/cgi-bin/kf/servicer/add?access_token=ACCESS_TOKEN';//添加接待人员
+		const WECHAT_KF_SERVICER_DEL  = '/cgi-bin/kf/servicer/del?access_token=ACCESS_TOKEN';//删除接待人员
+		const WECHAT_KF_SERVICER_LIST = '/cgi-bin/kf/servicer/list?access_token=ACCESS_TOKEN';//获取接待人员列表
+		/* 会话分配与消息收发 */
+		const WECHAT_KF_SERVICER_STATE_GET   = '/cgi-bin/kf/service_state/get?access_token=ACCESS_TOKEN';//获取会话状态
+		const WECHAT_KF_SERVICER_STATE_TRANS = '/cgi-bin/kf/service_state/trans?access_token=ACCESS_TOKEN';//变更会话状态
+		const WECHAT_KF_SYNC_MSG             = '/cgi-bin/kf/sync_msg?access_token=ACCESS_TOKEN';//获取消息
+		const WECHAT_KF_SEND_MSG             = '/cgi-bin/kf/send_msg?access_token=ACCESS_TOKEN';//发送消息
+		const WECHAT_KF_SEND_MSG_ON_EVENT    = '/cgi-bin/kf/send_msg_on_event?access_token=ACCESS_TOKEN';//发送欢迎语等事件响应消息
+		/* 「升级服务」配置 */
 		const WECHAT_KF_CUSTOMER_GET_UPGRADE_SERVICE_CONFIG = '/cgi-bin/kf/customer/get_upgrade_service_config?access_token=ACCESS_TOKEN';//获取配置的专员与客户群
-		const WECHAT_KF_CUSTOMER_UPGRADE_SERVICE            = '/cgi-bin/kf/customer/upgrade_service?access_token=ACCESS_TOKEN';//获取配置的专员与客户群
-		const WECHAT_KF_CUSTOMER_CANCEL_UPGRADE_SERVICE     = '/cgi-bin/kf/customer/cancel_upgrade_service?access_token=ACCESS_TOKEN';//获取配置的专员与客户群
-		const WECHAT_KF_SYNC_MSG                            = '/cgi-bin/kf/sync_msg?access_token=ACCESS_TOKEN';//获取消息
-		const WECHAT_KF_SEND_MSG                            = '/cgi-bin/kf/send_msg?access_token=ACCESS_TOKEN';//发送消息
-		const WECHAT_KF_CUSTOMER_BATCHGET                   = '/cgi-bin/kf/customer/batchget?access_token=ACCESS_TOKEN';//客户基本信息获取
+		const WECHAT_KF_CUSTOMER_UPGRADE_SERVICE            = '/cgi-bin/kf/customer/upgrade_service?access_token=ACCESS_TOKEN';//升级专员/客户群服务
+		const WECHAT_KF_CUSTOMER_CANCEL_UPGRADE_SERVICE     = '/cgi-bin/kf/customer/cancel_upgrade_service?access_token=ACCESS_TOKEN';//为客户取消推荐
+
+		/* 统计管理 */
+		const WECHAT_KF_GET_CORP_STATISTIC     = '/cgi-bin/kf/get_corp_statistic?access_token=ACCESS_TOKEN';//获取「客户数据统计」企业汇总数据
+		const WECHAT_KF_GET_SERVICER_STATISTIC = '/cgi-bin/kf/get_servicer_statistic?access_token=ACCESS_TOKEN';//获取「客户数据统计」接待人员明细数据
+
+		/* 其他基础信息获取 */
+		const WECHAT_KF_CUSTOMER_BATCHGET = '/cgi-bin/kf/customer/batchget?access_token=ACCESS_TOKEN';//客户基本信息获取
 
 		/* 代开发应用与第三方应用的兼容 */
 		const TO_OPEN_CORPID             = '/cgi-bin/corp/to_open_corpid?access_token=ACCESS_TOKEN'; // corpid的转换
@@ -542,19 +556,6 @@
 					}
 				}
 
-				$save_path = '/work/' . date('Ymd') . '/';
-				$save_dir  = \Yii::getAlias('@upload') . $save_path;
-				if (!file_exists($save_dir) && !mkdir($save_dir, 0755, true)) {
-				}
-
-				@file_put_contents($save_dir . 'work-api.txt', json_encode([
-						'time'                    => date('Y-m-d H:i'),
-						'errcode'                 => isset($this->repJson["errcode"]) ? $this->repJson["errcode"] : 0,
-						'realUrl'                 => $realUrl,
-						'method'                  => 'get',
-						'refreshTokenWhenExpired' => $refreshTokenWhenExpired,
-					], JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND);
-
 				return $this->repRawStr;
 			}
 		}
@@ -628,21 +629,6 @@
 						continue;
 					}
 				}
-
-				$save_path = '/work/' . date('Ymd') . '/';
-				$save_dir  = \Yii::getAlias('@upload') . $save_path;
-				if (!file_exists($save_dir) && !mkdir($save_dir, 0755, true)) {
-				}
-
-				@file_put_contents($save_dir . 'work-api.txt', json_encode([
-						'time'                    => date('Y-m-d H:i'),
-						'errcode'                 => isset($this->repJson["errcode"]) ? $this->repJson["errcode"] : 0,
-						'realUrl'                 => $realUrl,
-						'method'                  => 'post',
-						'args'                    => $args,
-						'refreshTokenWhenExpired' => $refreshTokenWhenExpired,
-						'isPostFile'              => $isPostFile,
-					], JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND);
 
 				return $json;
 			}
