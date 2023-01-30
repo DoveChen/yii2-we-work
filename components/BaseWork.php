@@ -102,10 +102,13 @@
 		const EXTERNAL_CONTACT_GROUP_CHAT_STATIC_GET = '/cgi-bin/externalcontact/groupchat/statistic_group_by_day?access_token=ACCESS_TOKEN';    // 获取客户群详情 POST
 
 		/* 消息推送 */
-		const EXTERNAL_CONTACT_ADD_MSG_TEMPLATE            = '/cgi-bin/externalcontact/add_msg_template?access_token=ACCESS_TOKEN';    // 添加企业群发消息任务 POST
-		const EXTERNAL_CONTACT_GET_GROUP_MSG_RESULT        = '/cgi-bin/externalcontact/get_group_msg_result?access_token=ACCESS_TOKEN';    // 获取企业群发消息发送结果 POST
-		const EXTERNAL_CONTACT_GET_GROUP_MSG_TASK          = '/cgi-bin/externalcontact/get_groupmsg_task?access_token=ACCESS_TOKEN';    // 获取群发成员发送任务列表 POST
-		const EXTERNAL_CONTACT_GET_GROUPMSG_SEND_RESULT    = '/cgi-bin/externalcontact/get_groupmsg_send_result?access_token=ACCESS_TOKEN';    // 获取群发成员发送任务列表 POST
+		const EXTERNAL_CONTACT_ADD_MSG_TEMPLATE         = '/cgi-bin/externalcontact/add_msg_template?access_token=ACCESS_TOKEN';    // 添加企业群发消息任务 POST
+		const EXTERNAL_CONTACT_GET_GROUP_MSG_RESULT     = '/cgi-bin/externalcontact/get_group_msg_result?access_token=ACCESS_TOKEN';    // 获取企业群发消息发送结果 POST
+		const EXTERNAL_CONTACT_GET_GROUP_MSG_TASK       = '/cgi-bin/externalcontact/get_groupmsg_task?access_token=ACCESS_TOKEN';    // 获取群发成员发送任务列表 POST
+		const EXTERNAL_CONTACT_GET_GROUPMSG_SEND_RESULT = '/cgi-bin/externalcontact/get_groupmsg_send_result?access_token=ACCESS_TOKEN';    // 获取群发成员发送任务列表 POST
+		const EXTERNAL_CONTACT_REMIND_GROUPMSG_SEND     = '/cgi-bin/externalcontact/remind_groupmsg_send?access_token=ACCESS_TOKEN';        // 提醒成员群发 POST
+		const EXTERNAL_CONTACT_CANCEL_GROUPMSG_SEND     = '/cgi-bin/externalcontact/cancel_groupmsg_send?access_token=ACCESS_TOKEN';        // 停止企业群发 POST
+
 		const EXTERNAL_CONTACT_SEND_WELCOME_MSG            = '/cgi-bin/externalcontact/send_welcome_msg?access_token=ACCESS_TOKEN';    // 发送新客户欢迎语 POST
 		const EXTERNAL_CONTACT_GROUP_WELCOME_TEMPLATE_ADD  = '/cgi-bin/externalcontact/group_welcome_template/add?access_token=ACCESS_TOKEN';    // 添加群欢迎语素材 POST
 		const EXTERNAL_CONTACT_GROUP_WELCOME_TEMPLATE_EDIT = '/cgi-bin/externalcontact/group_welcome_template/edit?access_token=ACCESS_TOKEN';    // 编辑群欢迎语素材 POST
@@ -153,6 +156,7 @@
 
 		/* 企业发表内容到客户的朋友圈 */
 		const MESSAGE_SEND_MOMENT_TASK = '/cgi-bin/externalcontact/add_moment_task?access_token=ACCESS_TOKEN'; // 发送应用消息 POST
+		const CANCEL_MOMENT_TASK       = '/cgi-bin/externalcontact/cancel_moment_task?access_token=ACCESS_TOKEN'; // 撤销企业发表朋友圈 POST
 
 		/* 上传附件 */
 		const MESSAGE_SEND_UPLOAD_ATTACMENT = '/cgi-bin/media/upload_attachment?access_token=ACCESS_TOKEN'; // 发送应用消息 POST
@@ -195,6 +199,8 @@
 		const OA_APPLY_EVENT         = '/cgi-bin/oa/applyevent?access_token=ACCESS_TOKEN';   // 提交审批申请 POST
 		const OA_GET_APPROVAL_INFO   = '/cgi-bin/oa/getapprovalinfo?access_token=ACCESS_TOKEN';   // 批量获取审批单号 POST
 		const OA_GET_APPROVAL_DETAIL = '/cgi-bin/oa/getapprovaldetail?access_token=ACCESS_TOKEN';   // 获取审批申请详情 POST
+
+		const OA_APPROVAL_CREATE_TEMPLATE = '/cgi-bin/oa/approval/create_template?access_token=ACCESS_TOKEN';   // 创建审批模板 POST
 
 		/* 企业微信公费电话 */
 		const DIAL_GET_DIAL_RECORD = '/cgi-bin/dial/get_dial_record?access_token=ACCESS_TOKEN'; // 获取公费电话拨打记录 POST

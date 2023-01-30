@@ -835,6 +835,22 @@
 			return $this->repJson;
 		}
 
+		public function ECRemindGroupmsgSend ($sendData)
+		{
+			Utils::checkNotEmptyStr($sendData['msgid'] ?? '', 'msgid');
+			self::_HttpCall(self::EXTERNAL_CONTACT_REMIND_GROUPMSG_SEND, 'POST', $sendData);
+
+			return $this->repJson;
+		}
+
+		public function ECCancelGroupmsgSend ($sendData)
+		{
+			Utils::checkNotEmptyStr($sendData['msgid'] ?? '', 'msgid');
+			self::_HttpCall(self::EXTERNAL_CONTACT_CANCEL_GROUPMSG_SEND, 'POST', $sendData);
+
+			return $this->repJson;
+		}
+
 		public function ECSendWelcomeMsg (ExternalContactMsgTemplate $msgTemplate)
 		{
 			ExternalContactMsgTemplate::checkMsgTemplateSendArgs($msgTemplate);
@@ -949,6 +965,73 @@
 		public function ECUpdateJoinWay ($params)
 		{
 			self::_HttpCall(self::UPDATE_JOIN_WAY, 'POST', $params);
+
+			return $this->repJson;
+		}
+
+		public function getSpModuleDetail ($t_id)
+		{
+			$args = [
+				'template_id' => $t_id,
+			];
+
+			self::_HttpCall(self::SERVICE_GET_SP_MODULE_DETAIL, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		public function getApprovalList ($data)
+		{
+			$args = [
+				'starttime' => $data['startTime'],
+				'endtime'   => $data['endTime'],
+				'cursor'    => $data['cursor'],
+				'size'      => $data['size'],
+			];
+
+			self::_HttpCall(self::OA_GET_APPROVAL_INFO, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		public function addSpModule ($data)
+		{
+			self::_HttpCall(self::OA_APPROVAL_CREATE_TEMPLATE, 'POST', $data);
+
+			return $this->repJson;
+		}
+
+		public function getSysTemplate ($data)
+		{
+			self::_HttpCall(self::OA_GET_TEMPLATE_DETIAL, 'POST', $data);
+
+			return $this->repJson;
+		}
+
+		public function getTemplateInfo ($data)
+		{
+			$args = [
+				'template_id' => $data,
+			];
+			self::_HttpCall(self::OA_GET_TEMPLATE_DETIAL, 'POST', $args);
+
+			return $this->repJson;
+		}
+
+		public function addSubmitSp ($data)
+		{
+			self::_HttpCall(self::OA_APPLY_EVENT, 'POST', $data);
+
+			return $this->repJson;
+		}
+
+		public function getApprovalDetail ($data)
+		{
+			$args = [
+				'sp_no' => $data,
+			];
+
+			self::_HttpCall(self::OA_GET_APPROVAL_DETAIL, 'POST', $args);
 
 			return $this->repJson;
 		}
@@ -1069,6 +1152,7 @@
 		{
 			Utils::checkNotEmptyStr($filePath, "filePath");
 			Utils::checkNotEmptyStr($type, "type");
+
 			if (!file_exists($filePath)) {
 				throw new \QyApiError("file not exists");
 			}
@@ -1174,6 +1258,19 @@
 		public function MessageSendMomentTask ($message)
 		{
 			self::_HttpCall(self::MESSAGE_SEND_MOMENT_TASK, 'POST', $message);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 朋友圈群发撤销
+		 * @throws \QyApiError
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 */
+		public function cancelMomentTask ($message)
+		{
+			self::_HttpCall(self::CANCEL_MOMENT_TASK, 'POST', $message);
 
 			return $this->repJson;
 		}

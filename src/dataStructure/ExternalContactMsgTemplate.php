@@ -12,6 +12,7 @@
 	 * @property array  $external_userid    客户的外部联系人id列表，不可与sender同时为空，最多可传入1万个客户
 	 * @property string $sender             发送企业群发消息的成员userid，不可与external_userid同时为空
 	 * @property string $chat_type          群发任务的类型，默认为single，表示发送给客户，group表示发送给客户群
+	 * @property string $allow_select       是否允许成员在待发送客户列表中重新进行选择，默认为false
 	 * @property array  $text               消息文本
 	 * @property array  $image              图片
 	 * @property array  $link               图文
@@ -35,7 +36,7 @@
 			if (!is_null($templateWelcomeCode)) {
 				$template->welcome_code = $templateWelcomeCode;
 			}
-			
+
 			$templateExternalUserid = Utils::arrayGet($arr, 'external_userid');
 			if (!is_null($templateExternalUserid)) {
 				$template->external_userid = $templateExternalUserid;
@@ -80,6 +81,12 @@
 			if (!is_null($chat_type)) {
 				$template->chat_type = $chat_type;
 			}
+
+			$allow_select = Utils::arrayGet($arr, 'allow_select');
+			if (!is_null($allow_select)) {
+				$template->allow_select = $allow_select;
+			}
+
 			return $template;
 		}
 
