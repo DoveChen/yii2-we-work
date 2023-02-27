@@ -79,7 +79,7 @@
 		 */
 		protected function getCacheKey ($name)
 		{
-			return $this->cachePrefix . '_' . $this->auth_corpid . '_' . $name;
+			return $this->cachePrefix . '_' . $this->suite_id . '_' . $this->auth_corpid . '_' . $name;
 		}
 
 		protected function RefreshAccessToken ()
