@@ -394,6 +394,11 @@
 		const OPENUSERID_TO_USERID         = '/cgi-bin/batch/openuserid_to_userid?access_token=ACCESS_TOKEN';   // userid转换
 		const FROM_SERVICE_EXTERNAL_USERID = '/cgi-bin/externalcontact/from_service_external_userid?access_token=ACCESS_TOKEN';   // external_userid转换
 
+		/*获取打卡记录数据*/
+		const GETCHECKINDATA = '/cgi-bin/checkin/getcheckindata?access_token=ACCESS_TOKEN';   // external_userid转换
+		/*打卡列表*/
+		const GETAPPROVALINFO = '/cgi-bin/oa/getapprovalinfo?access_token=ACCESS_TOKEN';
+
 		protected function GetAccessToken ($force = false)
 		{
 		}

@@ -561,6 +561,14 @@
 			return ExternalContact::wayParseFromArray($this->repJson);
 		}
 
+		public function ECGetUserInfo ($userId)
+		{
+			Utils::checkNotEmptyStr($userId, 'userid');
+			self::_HttpCall(self::USER_GET, 'GET', ['userid' => $userId]);
+
+			return $this->repJson;
+		}
+
 		public function ECUpdateContactWay (ExternalContactWay $externalContactWay)
 		{
 			ExternalContactWay::CheckExternalContactWayUpdateArgs($externalContactWay);
@@ -2166,6 +2174,41 @@
 		{
 			Utils::checkNotEmptyStr($externalUserid, 'external_userid');
 			self::_HttpCall(self::FROM_SERVICE_EXTERNAL_USERID, 'POST', ['external_userid' => $externalUserid, 'source_agentid' => $sourceAgentid]);
+
+			return $this->repJson;
+		}
+
+		/**
+		 * 获取打卡记录
+		 *
+		 * @param $opencheckindatatype
+		 * @param $starttime
+		 * @param $endtime
+		 * @param $useridlist
+		 *
+		 * @return null
+		 *
+		 * @throws \HttpError
+		 * @throws \NetWorkError
+		 * @throws \ParameterError
+		 * @throws \QyApiError
+		 */
+		public function Getcheckindata ($opencheckindatatype, $starttime, $endtime, $useridlist)
+		{
+			Utils::checkNotEmptyStr($opencheckindatatype, 'opencheckindatatype');
+			Utils::checkNotEmptyStr($starttime, 'starttime');
+			Utils::checkNotEmptyStr($endtime, 'endtime');
+			Utils::checkNotEmptyArray($useridlist, 'useridlist');
+			self::_HttpCall(self::GETCHECKINDATA, 'POST', ['opencheckindatatype' => $opencheckindatatype, 'starttime' => $starttime, 'endtime' => $endtime, 'useridlist' => $useridlist]);
+
+			return $this->repJson;
+		}
+
+		public function Getapprovalinfo ($starttime, $endtime, $cursor = 0, $size = 100, $filters = [])
+		{
+			Utils::checkNotEmptyStr($starttime, 'starttime');
+			Utils::checkNotEmptyStr($endtime, 'endtime');
+			self::_HttpCall(self::GETAPPROVALINFO, 'POST', ['size' => $size, 'cursor' => $cursor, 'starttime' => $starttime, 'endtime' => $endtime, 'filters' => $filters]);
 
 			return $this->repJson;
 		}
