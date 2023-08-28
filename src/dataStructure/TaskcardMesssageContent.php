@@ -70,7 +70,7 @@
 			Utils::checkNotEmptyStr($args->task_id, 'task_id');
 			Utils::checkNotEmptyArray($args->btn, 'btn');
 
-			if (count($args->btn) > 2) {
+			if (is_array($args->btn) && count($args->btn) > 2) {
 				throw new \QyApiError('btn only can be one or two');
 			}
 

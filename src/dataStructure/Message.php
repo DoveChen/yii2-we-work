@@ -58,13 +58,13 @@
 		 */
 		public static function CheckMessageSendArgs ($args)
 		{
-			if (count($args->touser) > 1000) {
+			if (is_array($args->touser) && count($args->touser) > 1000) {
 				throw new \QyApiError("touser should be no more than 1000");
 			}
-			if (count($args->toparty) > 100) {
+			if (is_array($args->toparty) && count($args->toparty) > 100) {
 				throw new \QyApiError("toparty should be no more than 100");
 			}
-			if (count($args->totag) > 100) {
+			if (is_array($args->totag) && count($args->totag) > 100) {
 				throw new \QyApiError("toparty should be no more than 100");
 			}
 

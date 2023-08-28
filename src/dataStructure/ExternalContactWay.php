@@ -64,7 +64,7 @@
 			if ($externalContactWay->type == ExternalContactWay::TYPE_ONLY) {
 				Utils::checkNotEmptyArray($externalContactWay->user, 'external contact user');
 
-				if (count($externalContactWay->user) > 1) {
+				if (is_array($externalContactWay->user) && count($externalContactWay->user) > 1) {
 					throw new \ParameterError('user only can be one');
 				}
 			}

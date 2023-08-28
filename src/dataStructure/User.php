@@ -137,7 +137,7 @@
 			foreach ($userIdList as $userId) {
 				Utils::checkNotEmptyStr($userId, "userid");
 			}
-			if (count($userIdList) > 200) {
+			if (is_array($userIdList) && count($userIdList) > 200) {
 				throw new \QyApiError("no more than 200 userid once");
 			}
 		}
